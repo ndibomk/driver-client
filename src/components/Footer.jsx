@@ -1,4 +1,3 @@
-import React from 'react'
 import { AiFillFacebook, AiFillInstagram, AiFillLinkedin, AiFillTwitterCircle } from 'react-icons/ai'
 
 const Footer = () => {
@@ -8,7 +7,7 @@ const Footer = () => {
         <div className="info">
             <div> <h2>Logo placeholder </h2></div>
             <p>Privacy policy</p>
-            <p>@ 2023 company name Inc. <br/>All rights reserved developed by <a href="https://navisoftwares.org" style={{textDecoration:"none"}} >Navi</a>   </p>
+            <p>@ 2023 company name Inc.</p>
 
             <div className="icons">
             <AiFillLinkedin size={17}/>

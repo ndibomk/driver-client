@@ -18,9 +18,7 @@ function Home() {
         <About/>
         <Questions/>
         <Partnership/>
-        {/* <ExpenseTracker expenses={expenses} budget={budget} /> */}
-
-        {/* <RegNext/> */}
+        
     </div>
   )
 }

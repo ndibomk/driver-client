@@ -1,46 +1,59 @@
-import React, { useState } from 'react'
-import Register from './authentication/Register';
-import MainAuth from './authentication/MainAuth';
+import React, { useEffect, useState } from "react";
+import Register from "./authentication/Register";
+import MainAuth from "./authentication/MainAuth";
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import { ImArrowRight } from "react-icons/im";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
-    const [showAnswer1, setShowAnswer1] = useState(false);
-    const [showAnswer, setShowAnswer] = useState(true);
+  const { user } = useSelector((state) => ({ ...state.auth }));
+  const navigate = useNavigate();
+  const [showAnswer1, setShowAnswer1] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(true);
 
-    const handleQuestion1Click = () => {
-        setShowAnswer1(!showAnswer1);
-        setShowAnswer(!showAnswer);
-       
-      };
-    //   const handleQuestion1Click1 = () => {
-    //     setShowAnswer(!showAnswer);
-       
-    //   };
+  const handleQuestion1Click = () => {
+    setShowAnswer1(!showAnswer1);
+    setShowAnswer(!showAnswer);
+  };
+  //   const handleQuestion1Click1 = () => {
+  //     setShowAnswer(!showAnswer);
+
+  //   };
+  useEffect(()=>{
+    if(user){
+      navigate('/dashboard')
+    }else{
+      navigate('/')
+    }
+          },[])
   return (
-    <div className='hero'>
-        <div className="left">
-            <div className="hero-pg"><h4 className='introp'>
-            Ditch the dinner deliveries drive with a sharper purpose.
-                </h4>
-               
-                </div>
-                <div className="quiz-content">
-            <div className='question-title'>
-       
-        <div className="herobtn"><button onClick={handleQuestion1Click} className='btnhero'>Sign up</button>
-       </div>
-        </div>
-        
-            </div>
-            
-        </div>
-        <div className="right" >
-          {showAnswer ? <img src="https://media.istockphoto.com/id/1253501430/photo/delivery-biker-arriving-at-destination-motogirl.jpg?s=612x612&w=0&k=20&c=GxenUWkAgMNjYmXYrrSdDQolfEIKJW0zgXaH3NuOj48=" alt="" />:
-                  <p>{showAnswer1 &&<MainAuth/>}</p>
-                }  
-        </div>
-        
-    </div>
-  )
-}
+    <div className="hero">
+                 {/* {user ? navigate('/'):navigate('/dashboard') } */}
 
-export default Hero
+      <div className="left">
+        <div className="hero-pg">
+          <h4 className="introp">
+            Ditch the dinner deliveries.  Drive with a sharper purpose.
+          </h4>
+        </div>
+        <div className="quiz-content">
+          <div className="question-title">
+            <div className="herobtn"><button onClick={handleQuestion1Click} className='btnhero'>Sign up</button>
+            <span className="hero-icon"><ImArrowRight size={35}/></span>
+       </div>
+          </div>
+        </div>
+      </div>
+      <div className="right">
+         {showAnswer ? (
+          <MainAuth />
+        ) : ( 
+          <MainAuth />
+         )} 
+      </div>
+    </div>
+  );
+};
+
+export default Hero;
