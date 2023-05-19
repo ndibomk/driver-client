@@ -176,6 +176,11 @@ function MultiStepForm() {
           </div>
         )}
         {step === 4 && (
+          <>
+          {loading ? (
+      <div className="spinner">Loading...</div>
+
+          ):
           <div className="register">
             <h3 style={{ marginTop: "3rem" }}>Sign up to become a driver </h3>
             <form onSubmit={handleSubmit} className="form">
@@ -230,6 +235,8 @@ function MultiStepForm() {
               </div>
             </form>
           </div>
+        }
+          </>
         )}
         {step === 5 && (
           <>
