@@ -211,7 +211,7 @@ function MultiStepForm() {
                     setForm({ ...form, password: e.target.value })
                   }
                   type="password"
-                  placeholder=" &nbsp; Password "
+                  placeholder=" &nbsp; Password"
                 />
               </div>
               <div className="input">
