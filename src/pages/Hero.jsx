@@ -5,6 +5,7 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { ImArrowRight } from "react-icons/im";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import MultiStepForm from "./authentication/Register";
 
 const Hero = () => {
   const { user } = useSelector((state) => ({ ...state.auth }));
@@ -34,12 +35,12 @@ const Hero = () => {
       <div className="left">
         <div className="hero-pg">
           <h4 className="introp">
-            Ditch the dinner deliveries.  Drive with a sharper purpose.
+            Ditch the dinner deliveries.  Drive  with  a sharper purpose.
           </h4>
         </div>
         <div className="quiz-content">
           <div className="question-title">
-            <div className="herobtn"><button onClick={handleQuestion1Click} className='btnhero'>Sign up</button>
+            <div className="herobtn"><button style={{marginLeft:'1rem'}} onClick={handleQuestion1Click} className='btnhero'>Sign up</button>
             <span className="hero-icon"><ImArrowRight size={35}/></span>
        </div>
           </div>
@@ -47,9 +48,9 @@ const Hero = () => {
       </div>
       <div className="right">
          {showAnswer ? (
-          <MainAuth />
+          <MultiStepForm />
         ) : ( 
-          <MainAuth />
+          <MultiStepForm />
          )} 
       </div>
     </div>

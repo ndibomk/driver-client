@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login, register } from "../../redux/features/authSlice";
 import { toast } from "react-toastify";
+import Cards from "./RegNext";
 function MainAuth() {
   const [isSignup, setIsSignup] = useState(true);
   const [location, setLocation] = useState(false);
@@ -20,7 +21,8 @@ function MainAuth() {
   const [email, setEmail] = useState("");
   const [tell, setTell] = useState("");
   const initialValues = {
-    name: "",
+    firstname: "",
+    lastname: "",
     password: "",
   };
 
@@ -31,6 +33,11 @@ function MainAuth() {
     email: "",
     tell: "",
   });
+
+  const [isExpanded, setIsExpanded] = useState(false);
+  const toggleExpanded = () => {
+    setIsExpanded(!isExpanded);
+  };
 
   useEffect(() => {
     setForm((prevForm) => ({
@@ -57,16 +64,14 @@ function MainAuth() {
   };
 
   const [formValue, setUser] = useState(initialState);
-  const {  password } = formValue;
+  const { password } = formValue;
 
   const handleSubmit1 = (e) => {
     e.preventDefault();
-if(password){
-  dispatch(login({ formValue, navigate, toast }));
-}
+    if (password) {
+      dispatch(login({ formValue, navigate, toast }));
+    }
   };
-
-
 
   const handleSignupClick = () => {
     e.preventDefault();
@@ -136,6 +141,14 @@ if(password){
     setFinal(false);
     setSignup(false);
   };
+  const Back6 = () => {
+    setIsSignup(true);
+    setIsLogin(false);
+    setLocation(false);
+    setPhone(false);
+    setFinal(false);
+    setSignup(false);
+  };
   const Back4 = () => {
     setIsSignup(false);
     setIsLogin(false);
@@ -169,14 +182,10 @@ if(password){
               </button>
             </form>
           </div>
-          {/* <div className="button1"> */}
-
-          {/* </div> */}
         </>
       )}
-      {/* {isLogin ?'hii':'hello'} */}
       {isLogin && (
-        <div className="register2">
+        <div className= "register2">
           <h3>Sign up to become a driver </h3>
           <form onSubmit={handleNextPhone} className="form">
             <div className="input">
@@ -195,7 +204,7 @@ if(password){
                   fontWeight={600}
                   style={{ cursor: "pointer", fontWeight: "800" }}
                   size={30}
-                  onClick={Back2}
+                  onClick={Back6}
                   color="#700841"
                 />
               </div>
@@ -251,8 +260,17 @@ if(password){
             <div className="input">
               <input
                 type="text"
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                onChange={(e) =>
+                  setForm({ ...form, firstname: e.target.value })
+                }
                 placeholder=" First Name"
+              />
+            </div>
+            <div className="input">
+              <input
+                type="text"
+                onChange={(e) => setForm({ ...form, lastname: e.target.value })}
+                placeholder=" Last Name"
               />
             </div>
             <div className="input">
@@ -326,7 +344,7 @@ if(password){
               Log in
             </button>
           </form>
-          <button className="reg-btns" onClick={Back3}>
+          <button className="reg-btns" onClick={Back6}>
             New user? Sign up
           </button>
         </div>

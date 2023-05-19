@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {AiOutlinePlus,AiOutlineMinus} from'react-icons/ai'
+import React, { useState } from "react";
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 function Questions() {
   const [showAnswer1, setShowAnswer1] = useState(false);
   const [showAnswer2, setShowAnswer2] = useState(false);
@@ -60,72 +60,71 @@ function Questions() {
   };
 
   return (
-    <div className='u'>
-    
-   <h1 className='quiz-header'>Common questions about shopping with instacart</h1>
-    <div className='main-Questions'>
-        
+    <div className="u">
+      <h1 className="quiz-header">Common Questions About Dulldash</h1>
+      <div className="main-Questions">
         <div className="questions">
-            <div className="quiz-content">
-            <div className='question-title'>
-        <p>What is company name</p>
-        <h2 onClick={handleQuestion1Click}>
-          {showAnswer1 ? <AiOutlineMinus/> : <AiOutlinePlus size={25}/>}
-        </h2>
-        </div>
-        <p>{showAnswer1 && <p>Answer 1</p>}</p>
-        
+          <div className="quiz-content">
+            <div className="question-title">
+              <p>Who are we?</p>
+              <h2 onClick={handleQuestion1Click}>
+                {showAnswer1 ? <AiOutlineMinus /> : <AiOutlinePlus size={25} />}
+              </h2>
             </div>
-      <hr />
-      
-      <div className="quiz-content">
-        <div className="question-title">
-            <p>How do i sign up to become comapany name shopper in us</p>
-        <h2 onClick={handleQuestion2Click}>
-           {showAnswer2 ? <AiOutlineMinus/> : <AiOutlinePlus size={25}/>}
-        </h2>
-        
+            <p className="answer">
+              {showAnswer1 && (
+                <p>A small team based out of San Antonio, TX. </p>
+              )}
+            </p>
+          </div>
+          <hr />
+
+          <div className="quiz-content">
+            <div className="question-title">
+              <p>"How do I get started?</p>
+              <h2 onClick={handleQuestion2Click}>
+                {showAnswer2 ? <AiOutlineMinus /> : <AiOutlinePlus size={25} />}
+              </h2>
+            </div>
+            <p className="answer">
+              {showAnswer2 && (
+                <p>
+                  Just simply sign up above and we'll take care of the rest.
+                </p>
+              )}
+            </p>
+          </div>
+          <hr />
+          <div className="quiz-content">
+            <div className="question-title">
+              <p>How will I get paid?</p>
+              <h2 onClick={handleQuestion3Click}>
+                {showAnswer3 ? <AiOutlineMinus /> : <AiOutlinePlus size={25} />}
+              </h2>
+            </div>
+            <p className="answer">
+              {showAnswer3 && (
+                <p>We process all driver payments through Zelle.</p>
+              )}
+            </p>
+          </div>
+          <hr />
+          <div className="quiz-content">
+            <div className="question-title">
+              <p>Do I need any special documentation?</p>
+              <h2 onClick={handleQuestion4Click}>
+                {showAnswer4 ? <AiOutlineMinus /> : <AiOutlinePlus size={25} />}
+              </h2>
+            </div>
+            <p className="answer">
+              {showAnswer4 && <p>Nope, just a valid driver's license!</p>}
+            </p>
+          </div>
+          <hr />
         </div>
-        <p>{showAnswer2 && <p>Answer 2</p>}</p>
       </div>
-      <hr />
-      <div className="quiz-content">
-        <div className="question-title">
-            <p>How do i get paid?</p>
-        <h2 onClick={handleQuestion3Click}>
-           {showAnswer3 ? <AiOutlineMinus/> : <AiOutlinePlus size={25}/>}
-        </h2>
-        
-        </div>
-        <p>{showAnswer3 && <p>Answer 3</p>}</p>
-      </div>
-      <hr />
-      <div className="quiz-content">
-        <div className="question-title">
-            <p>What are the requirements to become a company name shopper in usa?</p>
-        <h2 onClick={handleQuestion4Click}>
-           {showAnswer4 ? <AiOutlineMinus/> : <AiOutlinePlus size={25}/>}
-        </h2>
-        
-        </div>
-        <p>{showAnswer4 && <p>Answer 4</p>}</p>
-      </div>
-      <hr />
-      <div className="quiz-content">
-        <div className="question-title">
-            <p>What documents do i need to sign up?</p>
-        <h2 onClick={handleQuestion5Click}>
-           {showAnswer5 ? <AiOutlineMinus/> : <AiOutlinePlus size={25}/>}
-        </h2>
-        
-        </div>
-        <p>{showAnswer5&& <p>Answer 5</p>}</p>
-      </div>
-     
-      </div>
-    </div>
     </div>
   );
 }
 
-export default Questions
+export default Questions;

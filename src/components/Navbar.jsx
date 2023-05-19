@@ -17,10 +17,11 @@ function Header() {
     navigate('/')
   };
   return (
-    <div >
+    <div  >
  <Navbar style={{
   display:'flex',
-  gap:'2rem'
+  gap:'2rem',
+  
     // height:"70rem"
  }} bg="light" expand="lg">
       <Container>
@@ -35,6 +36,10 @@ function Header() {
                 </h1>
           
         </div>
+        {/* <Link to='/admin'>
+        <button className="btn">Admin</button>
+
+        </Link> */}
         <div>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

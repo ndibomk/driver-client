@@ -5,15 +5,15 @@ import axios from "axios";
 
 export const createProject = createAsyncThunk(
   "project/createProject",
-  async (values) => {
+  async (formData) => {
     try {
-      const response = await api.createTour(values)
+      const response = await api.createTour(formData)
       toast.success("post Successfully");
 
       return response.data;
 
     } catch (error) {
-      if(!values){
+      if(!formData){
         toast.error('error');
 
       }

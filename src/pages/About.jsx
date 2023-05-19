@@ -8,8 +8,8 @@ const About = () => {
             <div className="about-num">
                 <div className="about-numbers">
             <div style={{}} className="main-one">
-               <h3 style={{fontWeight:'900'}}>Consistent pay rises!</h3>
-               <h5 style={{fontSize:'1rem', fontWeight:''}}>
+               <h3 style={{fontWeight:'900',width:'100%'}}>Consistent pay rises!</h3>
+               <h5 style={{fontSize:'1rem', fontWeight:'',width:'10rem'}}>
                 Every time you complete an order milestone.Your rate goes up its simple as that .No strings attached.
                </h5>
             </div>
