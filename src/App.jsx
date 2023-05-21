@@ -25,6 +25,7 @@ import SingleUser from './pages/users/SingleUser';
 import UserOrders from './pages/users/UserOrders';
 import Analytics from './pages/Analytics';
 import Todo from './pages/test/Todo';
+import Feedback from './pages/users/Feedback';
 function App() {
   const dispatch = useDispatch();
   const[data,setDate]=useState([])
@@ -51,6 +52,7 @@ console.log('user',user);
      </Route>
      <Route path='/login' element={<Login/>}/>
      <Route path='/orders' element={<CustomerOrders/>}/>
+     <Route path='/feedback' element={<Feedback/>}/>
      {/* <ProtectedRoutes path="/dashboard" component={<Main/> }/> */}
      <Route path='/dashboard' element={<Main/>}/>
      <Route path='user/:id' element={<SingleUser/>}/>

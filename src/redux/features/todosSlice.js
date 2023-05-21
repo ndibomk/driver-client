@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const baseURL = "http://localhost:5000/api/";
 const baseURL1 = "http://localhost:5000/stats/";
@@ -64,10 +65,13 @@ export const updateTodo = createAsyncThunk(
       const response = await axios.put(baseURL + "todos/" + _id, {
         task,
         author,
+        
         isComplete,
         date,
         uid,
       });
+      toast.success("user activated Successfully");
+
       return response.data;
     } catch (error) {
       console.log(error);
@@ -76,19 +80,21 @@ export const updateTodo = createAsyncThunk(
   }
 );
 export const rejectUser = createAsyncThunk(
-  "todos/updateTodo",
+  "todos/rejectUser",
   async (todo, { rejectWithValue }) => {
     try {
-      const { _id, task,status, author, isComplete, date, uid } = todo;
+      const { _id, task, author, isComplete, date, uid } = todo;
 
-      const response = await axios.put(baseURL + "todos/" + _id, {
+      const response = await axios.put(baseURL + "todos/status/" + _id, {
         task,
         author,
         isComplete,
         date,
-        status,
+     
         uid,
       });
+      toast.success("user rejected Successfully");
+
       return response.data;
     } catch (error) {
       console.log(error);

@@ -25,13 +25,17 @@ const SingleUser = () => {
       
 
   return (
+    <>
+       <h3 style={{color:'white' ,textAlign:'center',marginTop:'1rem'}}>Driver Profile</h3>
     <div className='single-user'>
+   
         <div className="user-content">
      <div className="user-data">
-        <p>Name : {products.name}</p>
-        <p>Email : {products.email}</p>
-        <p>Phone  : {products.tell}</p>
-        <p>Zip code  : {products.tell}</p>
+      <div className='item-user'><p>Name :</p> <p>{products.name}</p> </div>
+        <div className='item-user'><p>Email : </p> <p>{products.email}</p></div>
+        <div className='item-user'><p>Phone  : </p> <p>{products.tell}</p></div>
+        <div className='item-user'>  <p>Zip code  :</p> <p>{products.tell}</p> </div>
+       
         <div className="password-rest">
     <button style={{width:'12rem'}} className="btn">Reset password </button>
     <Link to={`/orders/${products._id}`}>
@@ -45,6 +49,7 @@ const SingleUser = () => {
 
 </div>
     </div>
+    </>
   )
 }
 

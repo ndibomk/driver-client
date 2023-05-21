@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 const UserOrders = () => {
   const {id}=useParams()
@@ -67,9 +67,19 @@ const UserOrders = () => {
           <div className="driver-cut">
             <p>Driver cut: $0.00</p>
             <p>$0.00</p>
+            <div className="feedbacks">
             <button className="">Send invoice</button>
+            <Link to='/feedback'>
+            <button className="">Feedback</button>
+
+            </Link>
+            </div>
+           
+
           </div>
+          
          </div>
+         
          {/* feedback */}
           </>
         )

@@ -40,7 +40,7 @@ const Pedding = () => {
   }, []);
 
   return (
-    <div className="pending" style={{height:'23rem'}}>
+    <div className="pending" style={{}}>
       <Table striped bordered hover size="sm"  style={{width:'100%'}}>
         <thead>
           <tr>
@@ -59,7 +59,7 @@ const Pedding = () => {
                   <td>
                     {user.email} {user.tell}
                   </td>
-                  <td>{user.isComplete ==='true'&& 'Rejected'}</td>
+                  <td>{user.status ===true && 'Rejected'}</td>
                  
                     <button className="btn-admin" style={{ paddingTop: ".5rem" }}>send notification</button>{" "}
                  

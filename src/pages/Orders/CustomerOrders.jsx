@@ -11,7 +11,7 @@ const WebcamComponent = () => <Webcam />;
 const videoConstraints = {
   width: 200,
   height: 200,
-  facingMode: "user",
+  facingMode: 'environment' ,
 };
 const CustomerOrders = () => {
   const dispatch = useDispatch();
