@@ -59,18 +59,18 @@ const AdminDashBoard = () => {
             <div style={{ paddingLeft: "2px" }} className="admin-table">
               <div className={`my-button isActive ? 'active' : 'inactive'`}>
                 <Link style={{ textDecoration: "none" }} to="/admin">
-                  <h4>Active User</h4>
+                  <h4>Active Users</h4>
                 </Link>
               </div>
 
               <div className="line-admin"></div>
               <Link style={{ textDecoration: "none" }} to="pending">
-                <h4>Pending User</h4>
+                <h4>Pending Users</h4>
               </Link>
 
               <div className="line-admin"></div>
               <Link style={{ textDecoration: "none" }} to="rejected">
-                <h4>Inactive User</h4>
+                <h4>Inactive Users</h4>
               </Link>
               {/* <div className="line-admin"></div> */}
             </div>
