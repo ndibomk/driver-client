@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: 'https://erytyu.onrender.com',
+  baseURL: 'http://localhost:5000',
 });
 
 API.interceptors.request.use((req) => {
@@ -21,3 +21,5 @@ export const createTour = (formData) => API.post("/products", formData);
 export const createMessage = (formData) => API.post("/message", formData);
 export const createHelp = (formData) => API.post("/help", formData);
 export const createAnswer = (formData) => API.post("/answer", formData);
+export const user = (updatedTourData, id) =>
+  API.patch(`users/update/${id}`, updatedTourData);

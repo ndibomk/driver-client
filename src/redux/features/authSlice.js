@@ -1,13 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
-const api= 'https://erytyu.onrender.com/users'
+import * as api from '../api'
+const url = 'http://localhost:5000/users'
 
 export const login = createAsyncThunk(
   "auth/login",
   async ({ formValue, navigate, toast }, { rejectWithValue }) => {
     try {
-      const response = await  axios.post(`${api}/signin`,formValue);
+      const response = await  axios.post(`${url}/signin`,formValue);
       toast.success("Login Successfully");
       navigate("/dashboard");
       return response.data;
@@ -23,7 +24,7 @@ export const register = createAsyncThunk(
   "auth/register",
   async ({ form, navigate, toast }, { rejectWithValue }) => {
     try {
-      const response = await  axios.post(`${api}/signup`,form);
+      const response = await  axios.post(`${url}/signup`,form);
       toast.success("Register Successfully");
       navigate("/dashboard");
       return response.data;
@@ -38,7 +39,7 @@ export const deleteUser = createAsyncThunk(
   "auth/deleteUser",
   async ({ id, toast }, { rejectWithValue }) => {
     try {
-      const response = await api.deleteUser(id);
+      const response = await url.deleteUser(id);
       toast.success("Deleted Successfully");
       return response.data;
     } catch (err) {
@@ -47,6 +48,19 @@ export const deleteUser = createAsyncThunk(
   }
 );
 
+export const updateUser = createAsyncThunk(
+  "auth/updateUser",
+  async ({ id,updatedTourData, toast, navigate }, { rejectWithValue }) => {
+    try {
+      const response = await api.updateUser(updatedTourData,id);
+      toast.success("Tour Updated Successfully");
+      navigate("/");
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 export const googleSignIn = createAsyncThunk(
   "auth/googleSignIn",
@@ -135,6 +149,27 @@ const authSlice = createSlice({
       }
     },
     [deleteUser.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.message;
+    },
+    [updateUser.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [updateUser.fulfilled]: (state, action) => {
+      state.loading = false;
+      const {
+        arg: { id },
+      } = action.meta;
+      if (id) {
+        state.userTours = state.userTours.map((item) =>
+          item._id === id ? action.payload : item
+        );
+        state.tours = state.tours.map((item) =>
+          item._id === id ? action.payload : item
+        );
+      }
+    },
+    [updateUser.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload.message;
     },

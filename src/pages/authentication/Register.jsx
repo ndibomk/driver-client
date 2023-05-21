@@ -33,6 +33,7 @@ function MultiStepForm() {
     firstname: "",
     lastname: "",
     password: "",
+    task:''
   };
 
   console.log(tell);
@@ -52,7 +53,7 @@ function MultiStepForm() {
   console.log("form", form);
   const initialState = {
     email: "",
-    password: "",
+    task: "",
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,11 +61,11 @@ function MultiStepForm() {
     dispatch(register({ form, navigate, toast }));
   };
   const [formValue, setUser] = useState(initialState);
-  const { password } = formValue;
+  const { task } = formValue;
 
   const handleSubmit1 = (e) => {
     e.preventDefault();
-    if (password) {
+    if (task) {
       dispatch(login({ formValue, navigate, toast }));
     }
   };
@@ -208,12 +209,13 @@ function MultiStepForm() {
                 </span>
                 <input
                   onChange={(e) =>
-                    setForm({ ...form, password: e.target.value })
+                    setForm({ ...form, task: e.target.value })
                   }
                   type="password"
                   placeholder=" &nbsp; Password"
                 />
               </div>
+             
               <div className="input">
                 <span>
                   <SlKey style={{ background: "" }} />
@@ -265,7 +267,7 @@ function MultiStepForm() {
                     <input
                       type="password"
                       onChange={(e) =>
-                        setUser({ ...formValue, password: e.target.value })
+                        setUser({ ...formValue, task: e.target.value })
                       }
                       placeholder=" &nbsp; password"
                     />

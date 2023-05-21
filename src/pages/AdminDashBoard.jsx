@@ -12,7 +12,14 @@ const AdminDashBoard = () => {
   function handleClick() {
     setIsActive(!isActive);
   }
-
+  const [todo, setTodo] = useState({
+    task: "",
+    isComplete: false,
+  });
+  const [todos, setTodos] = useState({
+    // task: "",
+    isComplete: false,
+  });
   const [users, setUsers] = useState([]);
   function compare(a, b) {
     if (a._id < b._id) {

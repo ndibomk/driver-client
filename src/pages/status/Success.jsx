@@ -27,7 +27,7 @@ const Pedding = () => {
   useEffect(() => {
   async function fetchData() {
   try {
-  const res = await axios.get(`https://erytyu.onrender.com/stats/succes`);
+  const res = await axios.get(`http://localhost:5000/stats/succes`);
 
   res.data.sort(compare);
   const result = res.data.filter((_, index) => index < 30);
@@ -41,39 +41,44 @@ const Pedding = () => {
   }, []);
 
   return (
-    <div className="pending" style={{height:'23rem'}}>
-      <Table striped bordered hover size="sm" style={{width:'100%'}}>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Contact</th>
-            <th> User Status</th>
-          </tr>
-        </thead>
+    <div className="pendng">
+        
+       
+      
+    <div className="tops">
+      <h5>Name</h5>
+      <h5>Contact</h5>
+      <h5>Status</h5>
+    </div>
+    <div className="pending-line"></div>
+
+    {/* <h2> You have {todos && todos.length} tasks </h2> */}
+    {users.map((todo) => (
+      <div className="pending-ite" key={todo._id}>
+        <Link className="suc-link" to={`/user/${todo._id}`} >
+        <h6>{todo.name}</h6>
+
+        </Link>
+        <Link className="suc-link" to={`/user/${todo._id}`}>
+           <h6>
+          {todo.email} {todo.tell}{" "}
+        </h6>
+        </Link>
+        <Link className="suc-link" to={`/user/${todo._id}`}>
+                  <h6>{todo.isComplete === true ? "Active" : "Pending"}</h6>
+
+        </Link>
+       
+
+         
+          <button className="btn-admin" > <h6>Send notification</h6> </button>{" "}
+
+          
 
         
-        {users?.map((user) => {
-              return (
-                <>
-        <tbody>
-          <tr>
-            
-                  <td>{user.name}</td>
-                  <td>
-                    {user.email} {user.tell}
-                  </td>
-                  <td>{user.status==true && 'Active'}</td>
-                 
-                    <button className="btn-admin" style={{ paddingTop: ".5rem" }}>send notification</button>{" "}
-                 
-              
-          </tr>
-        </tbody>
-        </>
-              );
-            })}
-      </Table>
-    </div>
+      </div>
+    ))}
+  </div>
   );
 };
 

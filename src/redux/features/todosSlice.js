@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const baseURL = "http://localhost:5000/users/";
+const baseURL = "http://localhost:5000/api/";
+const baseURL1 = "http://localhost:5000/stats/";
 
 const initialState = {
   todos: [],
@@ -32,7 +33,7 @@ export const getTodos = createAsyncThunk(
   "todos/getTodos",
   async (id = null, { rejectWithValue }) => {
     try {
-      const response = await axios.get(baseURL + "todos");
+      const response = await axios.get(baseURL1 + "pending");
       return response.data;
     } catch (error) {
       console.log(error);
@@ -60,7 +61,7 @@ export const updateTodo = createAsyncThunk(
     try {
       const { _id, task, author, isComplete, date, uid } = todo;
 
-      const response = await axios.put(baseURL  + _id, {
+      const response = await axios.put(baseURL + "todos/" + _id, {
         task,
         author,
         isComplete,
@@ -74,7 +75,27 @@ export const updateTodo = createAsyncThunk(
     }
   }
 );
+export const rejectUser = createAsyncThunk(
+  "todos/updateTodo",
+  async (todo, { rejectWithValue }) => {
+    try {
+      const { _id, task,status, author, isComplete, date, uid } = todo;
 
+      const response = await axios.put(baseURL + "todos/" + _id, {
+        task,
+        author,
+        isComplete,
+        date,
+        status,
+        uid,
+      });
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response?.data);
+    }
+  }
+);
 const todosSlice = createSlice({
   name: "todos",
   initialState,
@@ -246,6 +267,51 @@ const todosSlice = createSlice({
         updateTodoStatus: "rejected",
         updateTodoError: action.payload,
       };
+      
+    },
+    [rejectUser.pending]: (state, action) => {
+      return {
+        ...state,
+        addTodoStatus: "",
+        addTodoError: "",
+        getTodosStatus: "",
+        getTodosError: "",
+        deleteTodoStatus: "",
+        deleteTodoError: "",
+        updateTodoStatus: "pending",
+        updateTodoError: "",
+      };
+    },
+    [rejectUser.fulfilled]: (state, action) => {
+      const updatedTodos = state.todos.map((todo) =>
+        todo._id === action.payload._id ? action.payload : todo
+      );
+      return {
+        ...state,
+        todos: updatedTodos,
+        addTodoStatus: "",
+        addTodoError: "",
+        getTodosStatus: "",
+        getTodosError: "",
+        deleteTodoStatus: "",
+        deleteTodoError: "",
+        updateTodoStatus: "success",
+        updateTodoError: "",
+      };
+    },
+    [rejectUser.rejected]: (state, action) => {
+      return {
+        ...state,
+        addTodoStatus: "",
+        addTodoError: "",
+        getTodosStatus: "",
+        getTodosError: "",
+        deleteTodoStatus: "",
+        deleteTodoError: "",
+        updateTodoStatus: "rejected",
+        updateTodoError: action.payload,
+      };
+      
     },
   },
 });

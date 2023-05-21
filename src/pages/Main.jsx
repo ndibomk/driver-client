@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 const Main = () => {
   const { user } = useSelector((state) => ({ ...state.auth }));
-console.log(user);
+  console.log(user);
   const [expenses, setExpenses] = useState([
     { description: "Groceries", amount: 60 },
     { description: "Gas", amount: 70 },
@@ -30,7 +30,6 @@ console.log(user);
         </>
       ) : (
         <>
-         
           <div className="Main">
             <div className="main-dash">
               <div className="main-top">
@@ -47,35 +46,74 @@ console.log(user);
                 </div>
               </div>
               <div className="main-middle">
-                {user?.result?.status === "succes" ? (
+                {user?.result?.isComplete === false ? (
                   <>
                     <Tests />
 
                     {/* <Button variant="primary" onClick={handleShow}>
         Launch demo modal
       </Button> */}
-
-                    <Modal show={show} onHide={handleClose}>
-                      <Modal.Header closeButton>
-                        <Modal.Title>
-                          Stand by while we review your application
-                        </Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        Woohoo, you are reading this text in a modal!
-                      </Modal.Body>
-                      <Modal.Footer>
+                    <div style={{ paddingTop: "3rem" }}>
+                      <Modal
+                        style={{ paddingTop: "9rem" }}
+                        show={show}
+                        onHide={handleClose}
+                      >
+                        <Modal.Header>
+                          <Modal.Title>
+                            Stand by while we review your application
+                          </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <h6>Woohoo, you are reading this text in a modal!</h6>
+                          <h6>
+                            We will be in touch with you soon regarding the
+                            status of your application{" "}
+                          </h6>
+                          <h6>
+                            If approved you will be invited to participate an
+                            interview drive.
+                          </h6>
+                        </Modal.Body>
+                        {/* <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
                           Close
                         </Button>
                         <Button variant="primary" onClick={handleClose}>
                           Save Changes
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
+                        </Button> */}
+                        {/* </Modal.Footer> */}
+                      </Modal>
+                    </div>
                   </>
                 ) : (
-                  ""
+                  <div style={{ paddingTop: "3rem" }}>
+                  <Modal
+                    style={{ paddingTop: "9rem",display:'flex',alignItems:'center',
+                  justifyContent:'center' }}
+                    show={show}
+                    onHide={handleClose}
+                  >
+                    <Modal.Header>
+                      <Modal.Title>
+                       Some random notification
+                      </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <h6>Your Account is Active Click okay to start</h6>
+                     <div></div>
+                     <Button onClick={handleClose} style={{marginLeft:'10rem',marginTop:'2rem'}}  className="btn">Okay</Button>
+                    </Modal.Body>
+                    {/* <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                      Close
+                    </Button>
+                    <Button variant="primary" onClick={handleClose}>
+                      Save Changes
+                    </Button> */}
+                    {/* </Modal.Footer> */}
+                  </Modal>
+                </div>
                 )}
 
                 <div className="status-draw">
@@ -95,15 +133,18 @@ console.log(user);
                       >
                         5%
                       </span>
-                      & <span
-                      style={{
-                        height: "17rem",
-                        borderRadius: "1px",
-                        background: "grey",
-                        width: "5rem",
-                        textAlign: "center",
-                      }}
-                      >$2</span>{" "}
+                      &{" "}
+                      <span
+                        style={{
+                          height: "17rem",
+                          borderRadius: "1px",
+                          background: "grey",
+                          width: "5rem",
+                          textAlign: "center",
+                        }}
+                      >
+                        $2
+                      </span>{" "}
                       <span
                         style={{
                           textAlign: "center",
@@ -125,8 +166,10 @@ console.log(user);
               </div>
               <div className="main-bottom">
                 <Link to="/orders">
-                  <button  className="order-button">
-                    <h1 style={{marginTop:'',textAlign:'center'}}>New Order</h1>
+                  <button className="order-button">
+                    <h1 style={{ marginTop: "", textAlign: "center" }}>
+                      New Order
+                    </h1>
                   </button>
                 </Link>
               </div>

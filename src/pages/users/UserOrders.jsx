@@ -9,7 +9,7 @@ const UserOrders = () => {
     async function fetchData(){
     try {
       
-      const res= await axios.get(`https://erytyu.onrender.com/products/${id}/posts`)
+      const res= await axios.get(`http://localhost:5000/products/userTours/${id}`)
      
       setUsers(res.data)
       console.log('data',res.data);

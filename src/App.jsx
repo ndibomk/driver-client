@@ -24,6 +24,7 @@ import AdminDashBoard from './pages/AdminDashBoard';
 import SingleUser from './pages/users/SingleUser';
 import UserOrders from './pages/users/UserOrders';
 import Analytics from './pages/Analytics';
+import Todo from './pages/test/Todo';
 function App() {
   const dispatch = useDispatch();
   const[data,setDate]=useState([])
@@ -44,7 +45,7 @@ console.log('user',user);
      <Routes>
      <Route path='/' element={<Home/>}/>
      <Route path='/admin' element={<AdminDashBoard/>}>
-     <Route path='pending' element={<Pedding/>}/>
+     <Route path='pending' element={<Todo/>}/>
      <Route index  element={<Success/>}/>
      <Route path='rejected' element={<Rejected/>}/>
      </Route>
