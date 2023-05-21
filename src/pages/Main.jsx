@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ExpenseTracker from "./Draw";
 import { useSelector } from "react-redux";
 import AdminDashBoard from "./AdminDashBoard";
@@ -8,6 +8,7 @@ import Tests from "./Tests";
 import { toast } from "react-toastify";
 
 import { Link } from "react-router-dom";
+import axios from "axios";
 const Main = () => {
   const { user } = useSelector((state) => ({ ...state.auth }));
   console.log(user);
@@ -22,6 +23,25 @@ const Main = () => {
   const [show, setShow] = useState(true);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [users,setUsers]=useState([])
+  const id=user?.result?._id
+  useEffect(()=>{
+    async function fetchData(){
+    try {
+      
+      const res= await axios.get(`http://localhost:5000/products/userTours/${id}`)
+     
+      setUsers(res.data)
+      console.log('data',res.data.length);
+     } catch (error) {
+      console.log(error);
+      
+    }
+    }
+    fetchData()
+      },[])
+
   return (
     <>
       {user?.result?.role === "admin" ? (
@@ -35,6 +55,7 @@ const Main = () => {
               <div className="main-top">
                 <h1>
                   Welcome{" "}
+                  
                   {user?.result?.status === false &&
                     user?.result?.isComplete === true && (
                       <p>{user?.result?.name} </p>
@@ -66,7 +87,7 @@ const Main = () => {
                           style={{ paddingTop: "9rem" }}
                           show={show}
                           onHide={handleClose}
-                          // backdrop="static" keyboard={false}
+                          backdrop="static" keyboard={false}
 
                         >
                           <Modal.Header>
@@ -117,7 +138,8 @@ const Main = () => {
                                                   >
                           <Modal.Header></Modal.Header>
                           <Modal.Body>
-                            <h6>Your Account has been Deactivated</h6>
+                            <h4> Account  Deactivated</h4>
+                            <h6>Your application has been denied your accont has been deactivated</h6>
                             <div></div>
                           </Modal.Body>
                           {/* <Modal.Footer>
