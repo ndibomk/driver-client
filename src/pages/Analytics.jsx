@@ -1,5 +1,5 @@
 import React from 'react'
-
+// http://localhost:5000/users
 const Analytics = () => {
   return (
     <div style={{background:'rgb(243, 240, 240)',paddingBottom:'7rem',paddingTop:'1rem'}}>
@@ -11,7 +11,7 @@ const Analytics = () => {
         <div className="triangle">
             <div className="tri-items">
             <div className="analytics-one">
-<h6 style={{fontSize:'',marginLeft:'3rem',paddingTop:'1rem'}}>1,0000
+<h6 style={{fontSize:'',marginLeft:'3rem',paddingTop:'1rem'}}>1,000
           <h6 style={{fontSize:'.8rem',marginRight:'rem',paddingRight:'1rem'}}>Page views</h6>
           </h6>
             </div>
