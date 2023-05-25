@@ -2,16 +2,18 @@
 import React, { useEffect, useState } from "react";
 // import Profile from "../WebcamComponent";
 import Webcam from "react-webcam";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { createProject } from "../../redux/features/productSlice";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import AddTodo from "../review/Review";
+import App from "../review/RevMain";
 const WebcamComponent = () => <Webcam />;
 const videoConstraints = {
   width: 200,
   height: 200,
-  facingMode: 'environment' ,
+  facingMode: "environment",
 };
 const CustomerOrders = () => {
   const dispatch = useDispatch();
@@ -22,7 +24,24 @@ const CustomerOrders = () => {
     const pictureSrc = webcamRef.current.getScreenshot();
     setPicture(pictureSrc);
   });
+  const { user } = useSelector((state) => ({ ...state.auth }));
+  const {id}=user?.result?._id
+  const [products,setProduct]=useState([])
 
+  useEffect(()=>{
+    async function fetchData(){
+    try {
+      
+      const res= await axios.get(`https://erytyu.onrender.com/products/userTours/${id}`)
+      setProduct(res.data)
+      
+     } catch (error) {
+      console.log(error);
+      
+    }
+    }
+    fetchData()
+      },[])
   const initialState = {
     firstname: "",
     phone: "",
@@ -132,8 +151,6 @@ const CustomerOrders = () => {
     setClicked2(!clicked2);
   };
 
-
-
   const handleClick3 = () => {
     setClicked3(!clicked3);
   };
@@ -145,17 +162,21 @@ const CustomerOrders = () => {
     setClicked5(!clicked5);
   };
 
-
-
-
-
-
   return (
     <div style={{}} className="orders">
       {starts && (
         <>
           <form onSubmit={handlestarts} className="start" id="forms">
             <h2 style={{ fontSize: "1.4rem" }}>Welcome to company name</h2>
+            {id}
+            {/* {id} */}
+            {products.map((i)=>{
+              return(
+                <>
+                {i.name}
+                </>
+              )
+            })}
             <p style={{ fontSize: "1rem" }}>
               lets get you started on your journey to becoming an expert dull
               hunter{" "}
@@ -441,77 +462,55 @@ const CustomerOrders = () => {
             <p>Just take 30 seconds to give us some feedback! </p>
             <h5>How would you rate this delivery?</h5>
             <div className="item-starts">
+              <div>
+                {" "}
+                <AiFillStar
+                  className={`star ${clicked1 ? "clicked1" : ""}`}
+                  onClick={handleClick1}
+                />
+              </div>
+              <div>
+                {" "}
+                <AiFillStar
+                  className={`star ${clicked2 ? "clicked2" : ""}`}
+                  onClick={handleClick2}
+                />
+              </div>
 
-           
-            <div>
-              {" "}
-              <AiFillStar
-                className={`star ${clicked1 ? "clicked1" : ""}`}
-                onClick={handleClick1}
-                
-              />
+              <div>
+                {" "}
+                <AiFillStar
+                  className={`star ${clicked3 ? "clicked3" : ""}`}
+                  onClick={handleClick3}
+                />
+              </div>
+              <div>
+                {" "}
+                <AiFillStar
+                  className={`star ${clicked4 ? "clicked4" : ""}`}
+                  onClick={handleClick4}
+                />
+              </div>
+              <div>
+                {" "}
+                <AiFillStar
+                  className={`star ${clicked5 ? "clicked5" : ""}`}
+                  onClick={handleClick5}
+                />
+              </div>
             </div>
-            <div>
-              {" "}
-              <AiFillStar
-                className={`star ${clicked2 ? "clicked2" : ""}`}
-                onClick={handleClick2}
-                
-              />
-            </div>
-        
-            <div>
-  {" "}
-  <AiFillStar
-    className={`star ${clicked3 ? "clicked3" : ""}`}
-    onClick={handleClick3}
-  />
-</div>
-<div>
-  {" "}
-  <AiFillStar
-    className={`star ${clicked4 ? "clicked4" : ""}`}
-    onClick={handleClick4}
-  />
-</div>
-<div>
-  {" "}
-  <AiFillStar
-    className={`star ${clicked5 ? "clicked5" : ""}`}
-    onClick={handleClick5}
-  />
-</div>
-        
-        
-</div>    
-        
-        
-        
-        
-        
-        
-        
-        
-           
-          
-          
-          
-          
-          
-          
-          
-        
-        
-        
-        
-        
-        
-           
+
             <br />
             <button style={{ marginTop: "70px" }} className="filled">
               {" "}
               No thanks
             </button>
+            {products.map((i)=>{
+              return(
+                <>
+                {i._id}</>
+              )
+            })}
           </form>
         </>
       )}

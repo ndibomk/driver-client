@@ -8,6 +8,7 @@ import {
 } from "../../redux/features/todosSlice";
 import moment from "moment";
 import { Table } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const ListTodos = () => {
   const [todo, setTodo] = useState({
@@ -35,13 +36,14 @@ const ListTodos = () => {
 
     if (todo._id) {
       dispatch(updateTodo(todo));
+      navigate('/admin/rejected')
     }
     setTodo({
       isComplete: false,
       status:false
     });
   };
-
+const navigate=useNavigate()
   useEffect(() => {
     dispatch(getTodos());
   }, [dispatch]);
@@ -54,6 +56,7 @@ const ListTodos = () => {
 window.alert('are sure  you want to activate this user')
     if (todo._id) {
       dispatch(rejectUser(todo));
+      navigate('/')
     }
     setTodo({
       isComplete: false,
@@ -81,6 +84,8 @@ window.alert('are sure  you want to activate this user')
             </h6>
             <h6>{todo.isComplete === true ? "Active" : "Pending"}</h6>
             <form onSubmit={handleSubmit1} className="pending-btns">
+            {todosState.getTodosStatus === "pending" ? "loading" : null}
+
               <button
                 className="btn-admin"
                 type="submit"

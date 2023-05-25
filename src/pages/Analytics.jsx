@@ -1,5 +1,5 @@
 import React from 'react'
-// http://localhost:5000/users
+
 const Analytics = () => {
   return (
     <div style={{background:'rgb(243, 240, 240)',paddingBottom:'7rem',paddingTop:'1rem'}}>

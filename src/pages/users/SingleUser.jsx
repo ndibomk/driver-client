@@ -11,7 +11,7 @@ const SingleUser = () => {
     async function fetchData(){
     try {
       
-      const res= await axios.get(`http://localhost:5000/users/${id}`)
+      const res= await axios.get(`https://erytyu.onrender.com/users/${id}`)
      
       setProduct(res.data)
       

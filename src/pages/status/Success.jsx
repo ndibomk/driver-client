@@ -27,7 +27,7 @@ const Pedding = () => {
   useEffect(() => {
   async function fetchData() {
   try {
-  const res = await axios.get(`http://localhost:5000/stats/succes`);
+  const res = await axios.get(`https://erytyu.onrender.com/stats/succes`);
 
   res.data.sort(compare);
   const result = res.data.filter((_, index) => index < 30);

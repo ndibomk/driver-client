@@ -9,6 +9,10 @@ import { toast } from "react-toastify";
 
 import { Link } from "react-router-dom";
 import axios from "axios";
+import MyComponent from "../Modal";
+import Review from "./test/Review";
+import App from "./review/RevMain";
+import Appp from "./review/MainCom";
 const Main = () => {
   const { user } = useSelector((state) => ({ ...state.auth }));
   console.log(user);
@@ -30,10 +34,10 @@ const Main = () => {
     async function fetchData(){
     try {
       
-      const res= await axios.get(`http://localhost:5000/products/userTours/${id}`)
+      const res= await axios.get(`https://erytyu.onrender.com/products/userTours/${id}`)
      
       setUsers(res.data)
-      console.log('data',res.data.length);
+      console.log('data444',res.data);
      } catch (error) {
       console.log(error);
       
@@ -53,7 +57,9 @@ const Main = () => {
           <div className="Main">
             <div className="main-dash">
               <div className="main-top">
+                {/* <App/> */}
                 <h1>
+                 
                   Welcome{" "}
                   
                   {user?.result?.status === false &&
@@ -66,11 +72,11 @@ const Main = () => {
               <div className="Middle">
                 <div className="middle-left">
                   <h3>Today's Profit</h3>
-                  <h1>$448</h1>
+                  <h1>{users.length*5}</h1>
                 </div>
                 <div className="middle-right">
                   <h3>30 Today's Profit</h3>
-                  <h1>${448 * 30}</h1>
+                  <h1>${users.length*5*30}</h1>
                 </div>
               </div>
               <div className="main-middle">
@@ -158,41 +164,7 @@ const Main = () => {
                 {user?.result?.isComplete === true &&
                   user?.result?.status === false ?(
                     <div style={{ paddingTop: "3rem" }}>
-                      <Modal
-                        style={{
-                          paddingTop: "9rem",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                        show={show}
-                        onHide={handleClose}
-                        backdrop="static" keyboard={false}
-
-                      >
-                        <Modal.Header>
-                          <Modal.Title>Some random notification</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <h6>Your Account is Active Click okay to start</h6>
-                          <div></div>
-                          <Button
-                            onClick={handleClose}
-                            style={{ marginLeft: "10rem", marginTop: "2rem" }}
-                            className="btn"
-                          >
-                            Okay
-                          </Button>
-                        </Modal.Body>
-                        {/* <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                      Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                      Save Changes
-                    </Button> */}
-                        {/* </Modal.Footer> */}
-                      </Modal>
+                      <MyComponent/>
                     </div>
                   ):''}
                

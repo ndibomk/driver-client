@@ -26,7 +26,14 @@ import UserOrders from './pages/users/UserOrders';
 import Analytics from './pages/Analytics';
 import Todo from './pages/test/Todo';
 import Feedback from './pages/users/Feedback';
+import {
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+import Protected from './Protected';
+import Control from './pages/review/Control';
 function App() {
+  
   const dispatch = useDispatch();
   const[data,setDate]=useState([])
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -45,16 +52,24 @@ console.log('user',user);
     
      <Routes>
      <Route path='/' element={<Home/>}/>
-     <Route path='/admin' element={<AdminDashBoard/>}>
+     <Route path='/review/:id' element={<Control/>}/>
+
+     <Route path='/admin' element={
+      <Protected isLoggedIn={user}>
+ <AdminDashBoard/>
+     </Protected>
+    }>
      <Route path='pending' element={<Todo/>}/>
      <Route index  element={<Success/>}/>
      <Route path='rejected' element={<Rejected/>}/>
      </Route>
      <Route path='/login' element={<Login/>}/>
      <Route path='/orders' element={<CustomerOrders/>}/>
-     <Route path='/feedback' element={<Feedback/>}/>
+     <Route path='/feedback/:id' element={<Feedback/>}/>
      {/* <ProtectedRoutes path="/dashboard" component={<Main/> }/> */}
-     <Route path='/dashboard' element={<Main/>}/>
+     <Route path='/dashboard' element={ <Protected isLoggedIn={user}>
+             <Main/>
+           </Protected>}/>
      <Route path='user/:id' element={<SingleUser/>}/>
      <Route path='/orders/:id' element={<UserOrders/>}/>
      <Route path='/analytics' element={<Analytics/>}/>

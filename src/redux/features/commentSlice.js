@@ -21,7 +21,7 @@ export const todosAdd = createAsyncThunk(
   "todos/todosAdd",
   async (todo, { rejectWithValue }) => {
     try {
-      const response = await axios.post(baseURL + "todos", todo);
+      const response = await axios.post(baseURL + "comment", todo);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -34,7 +34,7 @@ export const getTodos = createAsyncThunk(
   "todos/getTodos",
   async (id = null, { rejectWithValue }) => {
     try {
-      const response = await axios.get(baseURL1 + "pending");
+      const response = await axios.get(baseURL1 + "comment");
       return response.data;
     } catch (error) {
       console.log(error);
@@ -47,7 +47,7 @@ export const deleteTodo = createAsyncThunk(
   "todos/deleteTodo",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await axios.delete(baseURL + "todos/" + id);
+      const response = await axios.delete(baseURL + "comment/" + id);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -56,21 +56,21 @@ export const deleteTodo = createAsyncThunk(
   }
 );
 
-export const updateTodo = createAsyncThunk(
+export const updateReview = createAsyncThunk(
   "todos/updateTodo",
   async (todo, { rejectWithValue }) => {
     try {
-      const { _id, task, author, isComplete, date, uid } = todo;
+      const { _id, comment, author, isComplete, date, uid } = todo;
 
-      const response = await axios.put(baseURL + "todos/" + _id, {
-        task,
+      const response = await axios.put(baseURL + "comment/" + _id, {
+        comment,
         author,
-        
+
         isComplete,
         date,
         uid,
       });
-      toast.success("user rejected Successfully");
+      toast.success("user activated Successfully");
 
       return response.data;
     } catch (error) {
@@ -79,21 +79,22 @@ export const updateTodo = createAsyncThunk(
     }
   }
 );
+
 export const rejectUser = createAsyncThunk(
   "todos/rejectUser",
   async (todo, { rejectWithValue }) => {
     try {
-      const { _id, task, author, isComplete, date, uid } = todo;
+      const { _id, task, author, rating, isComplete, date, uid } = todo;
 
       const response = await axios.put(baseURL + "todos/status/" + _id, {
         task,
         author,
         isComplete,
         date,
-     
+        rating,
         uid,
       });
-      toast.success("user activated Successfully");
+      toast.success("user rejected Successfully");
 
       return response.data;
     } catch (error) {
@@ -231,7 +232,7 @@ const todosSlice = createSlice({
         updateTodoError: "",
       };
     },
-    [updateTodo.pending]: (state, action) => {
+    [updateReview.pending]: (state, action) => {
       return {
         ...state,
         addTodoStatus: "",
@@ -244,7 +245,7 @@ const todosSlice = createSlice({
         updateTodoError: "",
       };
     },
-    [updateTodo.fulfilled]: (state, action) => {
+    [updateReview.fulfilled]: (state, action) => {
       const updatedTodos = state.todos.map((todo) =>
         todo._id === action.payload._id ? action.payload : todo
       );
@@ -261,7 +262,7 @@ const todosSlice = createSlice({
         updateTodoError: "",
       };
     },
-    [updateTodo.rejected]: (state, action) => {
+    [updateReview.rejected]: (state, action) => {
       return {
         ...state,
         addTodoStatus: "",
@@ -273,7 +274,6 @@ const todosSlice = createSlice({
         updateTodoStatus: "rejected",
         updateTodoError: action.payload,
       };
-      
     },
     [rejectUser.pending]: (state, action) => {
       return {
@@ -317,7 +317,6 @@ const todosSlice = createSlice({
         updateTodoStatus: "rejected",
         updateTodoError: action.payload,
       };
-      
     },
   },
 });
