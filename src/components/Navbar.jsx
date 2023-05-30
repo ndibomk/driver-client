@@ -19,11 +19,11 @@ function Header() {
   return (
     <div  >
  <Navbar style={{
-  display:'flex',
-  gap:'2rem',
+  // display:'flex',
+  // gap:'2rem',
   
     // height:"70rem"
- }} bg="light" expand="lg">
+ }} bg="light" expand="sm">
       <Container>
         <div> <h1 className='logomain' >
          <Link  className='logomain'  to='/'>
@@ -40,19 +40,23 @@ function Header() {
         <button className="btn">Admin</button>
 
         </Link> */}
-        <div>
+        
+        
+        <div className="collapse-nav">
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
         {user?.result?._id ?<>
-          <button className='btn' onClick={(e)=>handleLogout()}>
+          <button  className='btn coll' onClick={(e)=>handleLogout()}>
             Log Out
           </button>
-        </>: <button className='btn'>
+        </>: <button  className='btn coll'>
             Sign up
           </button>}
           
         </Navbar.Collapse>
         </div>
+
         
       </Container>
     </Navbar>

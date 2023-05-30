@@ -29,29 +29,29 @@ const Hero = () => {
     }
           },[])
   return (
-    <div className="hero">
+    <div className="heros">
                  {/* {user ? navigate('/'):navigate('/dashboard') } */}
 
-      <div className="left">
-        <div className="hero-pg">
-          <h4 className="introp">
-            Ditch the dinner deliveriehs.  Drive  with  a sharper purpose.
+      <div className="lefts">
+        <div className="hero-pgs">
+          <h4 className="introps">
+            Ditch the dinner deliveries.  Drive  with  a sharper purpose.
           </h4>
         </div>
         <div className="quiz-content">
           <div className="question-title">
-            <div className="herobtn"><button style={{marginLeft:'1rem'}} onClick={handleQuestion1Click} className='btnhero'>Sign up</button>
+            <div className="herobtns"><button style={{marginLeft:'1rem'}} onClick={handleQuestion1Click} className='btnhero'>Sign up</button>
             <span className="hero-icon"><ImArrowRight size={35}/></span>
        </div>
           </div>
         </div>
       </div>
-      <div className="right">
-         {showAnswer ? (
-          <MultiStepForm />
-        ) : ( 
-          <MultiStepForm />
-         )} 
+      <div className="rightsjj">
+         {/* {showAnswer ? ( */}
+          <MultiStepForm  />
+        {/* ) : (  */}
+          {/* <MultiStepForm className='' /> */}
+         {/* )}  */}
       </div>
     </div>
   );

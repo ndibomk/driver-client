@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 // import Profile from "../WebcamComponent";
 import Webcam from "react-webcam";
+import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -9,6 +10,9 @@ import { createProject } from "../../redux/features/productSlice";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import AddTodo from "../review/Review";
 import App from "../review/RevMain";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import axios from "axios";
 const WebcamComponent = () => <Webcam />;
 const videoConstraints = {
   width: 200,
@@ -17,7 +21,6 @@ const videoConstraints = {
 };
 const CustomerOrders = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [picture, setPicture] = useState("");
   const webcamRef = React.useRef(null);
   const capture = React.useCallback(() => {
@@ -25,23 +28,67 @@ const CustomerOrders = () => {
     setPicture(pictureSrc);
   });
   const { user } = useSelector((state) => ({ ...state.auth }));
-  const {id}=user?.result?._id
-  const [products,setProduct]=useState([])
+  // const { id } = user?.result?._id;
+  const [products, setProduct] = useState([]);
 
-  useEffect(()=>{
-    async function fetchData(){
-    try {
-      
-      const res= await axios.get(`https://erytyu.onrender.com/products/userTours/${id}`)
-      setProduct(res.data)
-      
-     } catch (error) {
-      console.log(error);
-      
+  // useEffect(() => {
+    // async function fetchData() {
+      // try {
+        // const res = await axios.get(
+          // `https://erytyu.onrender.com/products/userTours/${id}`
+        // );
+        // setProduct(res.data);
+      // } catch (error) {
+        // console.log(error);
+      // }
+    // }
+    // fetchData();
+  // }, []);
+  function compare(a, b) {
+    if (a._id < b._id) {
+      return 1;
     }
+    if (a._id > b._id) {
+      return -1;
     }
-    fetchData()
-      },[])
+    return 0;
+  }
+  const [invoice, setInvoice] = useState([]);
+  // console.log('invoices',invoice);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await axios.get(`https://erytyu.onrender.com/invoice`);
+        res.data.sort(compare)
+    const result = res.data.filter((_, index) => index < 1);
+       
+
+        setInvoice(result);
+        console.log('results',result);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+  const [orders, setOrders] = useState([]);
+  // useEffect(()=>{
+  // if(invoice[0].userId===user?.result?._id){
+  // alert('you have a new invoice notification')
+  // }
+  // })
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await axios.get(`https://erytyu.onrender.com/products`);
+        setOrders(res.data);
+        // console.log("datauuuuu", res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
   const initialState = {
     firstname: "",
     phone: "",
@@ -87,7 +134,7 @@ const CustomerOrders = () => {
   };
   const handlepics = (e) => {
     e.preventDefault();
-    dispatch(createProject({ ...form, toast }));
+    // dispatch(createProject({ ...form, toast }));
     setpics(false);
     sethomebase(true);
   };
@@ -161,22 +208,36 @@ const CustomerOrders = () => {
   const handleClick5 = () => {
     setClicked5(!clicked5);
   };
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+ 
+
+  
+
+  const originalDate = "2023-05-20T09:46:57.706+00:00";
+  const formattedDate = moment(originalDate).format("D");
+
+  const currentDate = moment().format("D");
 
   return (
     <div style={{}} className="orders">
       {starts && (
         <>
           <form onSubmit={handlestarts} className="start" id="forms">
-            <h2 style={{ fontSize: "1.4rem" }}>Welcome to company name</h2>
-            {id}
+            <h2 style={{ fontSize: "1.4rem" }}>
+              Welcome
+              {/* <p>Original date: {originalDate}</p> */}
+              {/* <p>Formatted date: {currentDate - formattedDate}</p> */}
+              to company name
+            </h2>
+
             {/* {id} */}
-            {products.map((i)=>{
-              return(
-                <>
-                {i.name}
-                </>
-              )
-            })}
+            {/* {products.map((i) => {
+              return <>{i.name}</>;
+            })} */}
             <p style={{ fontSize: "1rem" }}>
               lets get you started on your journey to becoming an expert dull
               hunter{" "}
@@ -389,6 +450,38 @@ const CustomerOrders = () => {
             className="sharpening"
             id="forms"
           >
+            {invoice.map((item) => {
+              return (
+                <>
+                  {user?.result?._id === item.userId ? <>
+                  
+                    {moment(item.createdAt).format("D")-currentDate <=3?(
+                       <>
+                       <Modal show={show} onHide={handleClose}>
+                         <Modal.Header closeButton>
+                           <Modal.Title>Modal heading</Modal.Title>
+                         </Modal.Header>
+                         <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+                         <Modal.Footer>
+                           <Button variant="secondary" onClick={handleClose}>
+                             Close
+                           </Button>
+                           <Button variant="primary" onClick={handleClose}>
+                             Save Changes
+                           </Button>
+                         </Modal.Footer>
+                       </Modal>
+                       {item.name}
+                     </>
+                     
+                      ):''}
+
+                  </> : ""}
+                  <p></p>
+                </>
+              );
+            })}
+
             <h1>Sharpenning in progress</h1>
             <p>
               Please wait while the order is sharpened.Depending on order
@@ -505,11 +598,8 @@ const CustomerOrders = () => {
               {" "}
               No thanks
             </button>
-            {products.map((i)=>{
-              return(
-                <>
-                {i._id}</>
-              )
+            {products.map((i) => {
+              return <>{i._id}</>;
             })}
           </form>
         </>
@@ -552,7 +642,7 @@ const CustomerOrders = () => {
             action=""
             onSubmit={handlefeedback}
             id="forms"
-            className="feedback"
+            className="feedbackss"
           >
             <h1>Want to earn onother $ amount </h1>
             <p>Just take 30 second to give us some feedback</p>
@@ -575,13 +665,14 @@ const CustomerOrders = () => {
             <h1>Want to earn onother $ amount </h1>
             <p>Thank you</p>
             <p>An extra $ Amount has been added to your payout</p>
-
-            <button
-              style={{ width: "150px", float: "none", marginTop: "100px" }}
-              className="filled"
-            >
-              Back to dashboard
-            </button>
+            <Link to="/dashboard">
+              <button
+                style={{ width: "150px", float: "none", marginTop: "100px" }}
+                className="filled"
+              >
+                Back to dashboard
+              </button>
+            </Link>
           </form>
         </>
       )}

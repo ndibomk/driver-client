@@ -32,6 +32,7 @@ import {
 } from "@tanstack/react-query";
 import Protected from './Protected';
 import Control from './pages/review/Control';
+import Invoice from './pages/users/Invoice';
 function App() {
   
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ function App() {
   }, []);
 console.log('user',user);
   return (
-    <div className='App' style={{width:'100%'}}>
+    <div className='' style={{width:'100%'}}>
       <BrowserRouter>
     <ToastContainer/>
     {/* <Test/> */}
@@ -67,11 +68,12 @@ console.log('user',user);
      <Route path='/orders' element={<CustomerOrders/>}/>
      <Route path='/feedback/:id' element={<Feedback/>}/>
      {/* <ProtectedRoutes path="/dashboard" component={<Main/> }/> */}
-     <Route path='/dashboard' element={ <Protected isLoggedIn={user}>
+     <Route path='/dashboard' element={
              <Main/>
-           </Protected>}/>
+          }/>
      <Route path='user/:id' element={<SingleUser/>}/>
      <Route path='/orders/:id' element={<UserOrders/>}/>
+     <Route path='/invoice/:id' element={<Invoice/>}/>
      <Route path='/analytics' element={<Analytics/>}/>
      </Routes> 
      {/* <Home/> */}

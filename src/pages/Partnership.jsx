@@ -1,6 +1,14 @@
 import React from 'react'
+import { useState } from 'react'
+import MultiStepForm from './authentication/Register'
 
 function Partnership() {
+  const [show,setShow]=useState(false)
+
+  const handleShow=(e)=>{
+    e.preventDefault()
+    setShow(true)
+  }
   return (
     <div className='partnership'>
         <div className="signinfo">
@@ -9,12 +17,21 @@ function Partnership() {
         color:'#470e2d',
         marginBottom:'70px'
        }}>Choose company for flexible earnings</p>
-       <button className='btnsign'>Sign up</button>
+       <button onClick={handleShow} className='btnsign'>Sign up</button>
         </div>
         <div className="image">
-            <img className="image" height={500} width={500} style={{borderRadius:'20px',objectFit:'cover',marginTop:'23px'}}
-             src="https://media.istockphoto.com/id/1296986175/photo/young-man-working-for-a-food-delivery-service-checking-with-road-motorcycle-in-the-city.jpg?s=612x612&w=0&k=20&c=TXsIHrSIyFlkHSpJq_AhX3V0l9X_U79e9cfpdMNH5LQ=" alt="" />
+
+        {!show  ? <>
+           <img className="image" height={500} width={500} style={{borderRadius:'20px',objectFit:'cover',marginTop:'23px'}}
+            src="https://media.istockphoto.com/id/1296986175/photo/young-man-working-for-a-food-delivery-service-checking-with-road-motorcycle-in-the-city.jpg?s=612x612&w=0&k=20&c=TXsIHrSIyFlkHSpJq_AhX3V0l9X_U79e9cfpdMNH5LQ=" alt="" />
+        
+        </> : <>
+        <MultiStepForm/>
+        </>  }
+ 
         </div>
+ 
+       
     </div>
   )
 }

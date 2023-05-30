@@ -2,11 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const baseURL = "https://erytyu.onrender.com/api/";
-const baseURL1 = "https://erytyu.onrender.com/stats/";
+const baseURL = "https://erytyu.onrender.com/";
 
 const initialState = {
-  todos: [],
+  invoice: [],
   addTodoStatus: "",
   addTodoError: "",
   getTodosStatus: "",
@@ -17,11 +16,11 @@ const initialState = {
   updateTodoError: "",
 };
 
-export const todosAdd = createAsyncThunk(
-  "todos/todosAdd",
+export const invoiceAdd = createAsyncThunk(
+  "invoice/invoiceAdd",
   async (todo, { rejectWithValue }) => {
     try {
-      const response = await axios.post(baseURL + "comment", todo);
+      const response = await axios.post(baseURL + "invoice", todo);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -31,10 +30,10 @@ export const todosAdd = createAsyncThunk(
 );
 
 export const getTodos = createAsyncThunk(
-  "todos/getTodos",
+  "invoice/getinvoice",
   async (id = null, { rejectWithValue }) => {
     try {
-      const response = await axios.get(baseURL1 + "comment");
+      const response = await axios.get(baseURL1 + "pending");
       return response.data;
     } catch (error) {
       console.log(error);
@@ -44,10 +43,10 @@ export const getTodos = createAsyncThunk(
 );
 
 export const deleteTodo = createAsyncThunk(
-  "todos/deleteTodo",
+  "invoice/deleteTodo",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await axios.delete(baseURL + "comment/" + id);
+      const response = await axios.delete(baseURL + "invoice/" + id);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -56,42 +55,18 @@ export const deleteTodo = createAsyncThunk(
   }
 );
 
-export const updateReview = createAsyncThunk(
-  "todos/updateTodo",
+export const updateTodo = createAsyncThunk(
+  "invoice/updateTodo",
   async (todo, { rejectWithValue }) => {
     try {
-      const { _id, comment, author, isComplete, date, uid } = todo;
+      const { _id, task, author, isComplete, date, uid } = todo;
 
-      const response = await axios.put(baseURL + "comment/" + _id, {
-        comment,
-        author,
-
-        isComplete,
-        date,
-        uid,
-      });
-      toast.success("user activated Successfully");
-
-      return response.data;
-    } catch (error) {
-      console.log(error);
-      return rejectWithValue(error.response?.data);
-    }
-  }
-);
-
-export const rejectUser = createAsyncThunk(
-  "todos/rejectUser",
-  async (todo, { rejectWithValue }) => {
-    try {
-      const { _id, task, author, rating, isComplete, date, uid } = todo;
-
-      const response = await axios.put(baseURL + "todos/status/" + _id, {
+      const response = await axios.put(baseURL + "invoice/" + _id, {
         task,
         author,
+        
         isComplete,
         date,
-        rating,
         uid,
       });
       toast.success("user rejected Successfully");
@@ -103,12 +78,35 @@ export const rejectUser = createAsyncThunk(
     }
   }
 );
-const commentSlice = createSlice({
-  name: "todos",
+export const rejectUser = createAsyncThunk(
+  "invoice/rejectUser",
+  async (todo, { rejectWithValue }) => {
+    try {
+      const { _id, task, author, isComplete, date, uid } = todo;
+
+      const response = await axios.put(baseURL + "invoice/status/" + _id, {
+        task,
+        author,
+        isComplete,
+        date,
+     
+        uid,
+      });
+      toast.success("user activated Successfully");
+
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response?.data);
+    }
+  }
+);
+const invoiceSlice = createSlice({
+  name: "invoice",
   initialState,
   reducers: {},
   extraReducers: {
-    [todosAdd.pending]: (state, action) => {
+    [invoiceAdd.pending]: (state, action) => {
       return {
         ...state,
         addTodoStatus: "pending",
@@ -121,7 +119,7 @@ const commentSlice = createSlice({
         updateTodoError: "",
       };
     },
-    [todosAdd.fulfilled]: (state, action) => {
+    [invoiceAdd.fulfilled]: (state, action) => {
       // state.todos.push(action.payload);
       return {
         ...state,
@@ -136,7 +134,7 @@ const commentSlice = createSlice({
         updateTodoError: "",
       };
     },
-    [todosAdd.rejected]: (state, action) => {
+    [invoiceAdd.rejected]: (state, action) => {
       return {
         ...state,
         addTodoStatus: "rejected",
@@ -232,7 +230,7 @@ const commentSlice = createSlice({
         updateTodoError: "",
       };
     },
-    [updateReview.pending]: (state, action) => {
+    [updateTodo.pending]: (state, action) => {
       return {
         ...state,
         addTodoStatus: "",
@@ -245,7 +243,7 @@ const commentSlice = createSlice({
         updateTodoError: "",
       };
     },
-    [updateReview.fulfilled]: (state, action) => {
+    [updateTodo.fulfilled]: (state, action) => {
       const updatedTodos = state.todos.map((todo) =>
         todo._id === action.payload._id ? action.payload : todo
       );
@@ -262,7 +260,7 @@ const commentSlice = createSlice({
         updateTodoError: "",
       };
     },
-    [updateReview.rejected]: (state, action) => {
+    [updateTodo.rejected]: (state, action) => {
       return {
         ...state,
         addTodoStatus: "",
@@ -274,6 +272,7 @@ const commentSlice = createSlice({
         updateTodoStatus: "rejected",
         updateTodoError: action.payload,
       };
+      
     },
     [rejectUser.pending]: (state, action) => {
       return {
@@ -317,8 +316,9 @@ const commentSlice = createSlice({
         updateTodoStatus: "rejected",
         updateTodoError: action.payload,
       };
+      
     },
   },
 });
 
-export default commentSlice.reducer;
+export default invoiceSlice.reducer;

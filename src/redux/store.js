@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import AuthReducer from "./features/authSlice";
-import todosEeducer from "./features/todosSlice";
-
+import todosReducer from "./features/todosSlice";
+import commentReducer from "./features/commentSlice";
+import invoiceReducer from './features/invoiceSlice'
 // import ProductReducer from "./features/productSlice";
 // import cartReducer from "./features/cartSlice";
 // import messageReducer from "./features/Message";
@@ -10,8 +11,9 @@ import todosEeducer from "./features/todosSlice";
 const store=configureStore({
     reducer:{
         auth: AuthReducer,
-        todosState: todosEeducer,
-
+        todosState: todosReducer,
+        todos: commentReducer,
+        invoice: invoiceReducer,
         // project: ProductReducer,
         // cart:cartReducer,
         // message:messageReducer,

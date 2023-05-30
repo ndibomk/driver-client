@@ -28,7 +28,7 @@ const Feedback = () => {
         );
 
         setUsers(res.data);
-        console.log("datauuuuu", res.data);
+        // console.log("datauuuuu", res.data);
       } catch (error) {
         console.log(error);
       }

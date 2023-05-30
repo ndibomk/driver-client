@@ -54,14 +54,14 @@ const AdminDashBoard = () => {
           <button className="admin-analytics">Analytics</button>
         </Link>
 
-        <div className="table-control">
+        <div className="table-controls">
           <div className="set">
             <div style={{ paddingLeft: "2px" }} className="admin-table">
-              <div className={`my-button isActive ? 'active' : 'inactive'`}>
+              {/* <div className={`my-button isActive ? 'active' : 'inactive'`}> */}
                 <Link style={{ textDecoration: "none" }} to="/admin">
                   <h4>Active Users</h4>
                 </Link>
-              </div>
+              {/* </div> */}
 
               <div className="line-admin"></div>
               <Link style={{ textDecoration: "none" }} to="pending">

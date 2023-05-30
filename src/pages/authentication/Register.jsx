@@ -75,7 +75,9 @@ function MultiStepForm() {
         className="Card"
         style={{
           height: step === 1 || step === 4 || step == 5 ? "490px" : "380px",
+          
         }}
+
       >
         {step === 1 && (
           <div className="register">

@@ -46,7 +46,6 @@ function MainAuth() {
       tell,
     }));
   }, [email, tell]);
-  console.log("form", form);
 
   // const {  password, name } = form;
   const dispatch = useDispatch();
