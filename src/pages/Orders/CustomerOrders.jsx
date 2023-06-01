@@ -32,17 +32,17 @@ const CustomerOrders = () => {
   const [products, setProduct] = useState([]);
 
   // useEffect(() => {
-    // async function fetchData() {
-      // try {
-        // const res = await axios.get(
-          // `https://erytyu.onrender.com/products/userTours/${id}`
-        // );
-        // setProduct(res.data);
-      // } catch (error) {
-        // console.log(error);
-      // }
-    // }
-    // fetchData();
+  // async function fetchData() {
+  // try {
+  // const res = await axios.get(
+  // `https://erytyu.onrender.com/products/userTours/${id}`
+  // );
+  // setProduct(res.data);
+  // } catch (error) {
+  // console.log(error);
+  // }
+  // }
+  // fetchData();
   // }, []);
   function compare(a, b) {
     if (a._id < b._id) {
@@ -59,12 +59,11 @@ const CustomerOrders = () => {
     async function fetchData() {
       try {
         const res = await axios.get(`https://erytyu.onrender.com/invoice`);
-        res.data.sort(compare)
-    const result = res.data.filter((_, index) => index < 1);
-       
+        res.data.sort(compare);
+        const result = res.data.filter((_, index) => index < 1);
 
         setInvoice(result);
-        console.log('results',result);
+        console.log("results", result);
       } catch (error) {
         console.log(error);
       }
@@ -134,7 +133,7 @@ const CustomerOrders = () => {
   };
   const handlepics = (e) => {
     e.preventDefault();
-    // dispatch(createProject({ ...form, toast }));
+    dispatch(createProject({ ...form, toast }));
     setpics(false);
     sethomebase(true);
   };
@@ -147,11 +146,15 @@ const CustomerOrders = () => {
     e.preventDefault();
     setlocation(false);
     setsharpening(true);
+        console.log('hello');
+
   };
   const handlesharpening = (e) => {
     e.preventDefault();
     setsharpening(false);
     setdelivery(true);
+            console.log(invoice[0].phone);
+
   };
   const handledelivery = (e) => {
     e.preventDefault();
@@ -212,10 +215,6 @@ const CustomerOrders = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
- 
-
-  
 
   const originalDate = "2023-05-20T09:46:57.706+00:00";
   const formattedDate = moment(originalDate).format("D");
@@ -453,30 +452,49 @@ const CustomerOrders = () => {
             {invoice.map((item) => {
               return (
                 <>
-                  {user?.result?._id === item.userId ? <>
-                  
-                    {moment(item.createdAt).format("D")-currentDate <=3?(
-                       <>
-                       <Modal show={show} onHide={handleClose}>
-                         <Modal.Header closeButton>
-                           <Modal.Title>Modal heading</Modal.Title>
-                         </Modal.Header>
-                         <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-                         <Modal.Footer>
-                           <Button variant="secondary" onClick={handleClose}>
-                             Close
-                           </Button>
-                           <Button variant="primary" onClick={handleClose}>
-                             Save Changes
-                           </Button>
-                         </Modal.Footer>
-                       </Modal>
-                       {item.name}
-                     </>
-                     
-                      ):''}
+                  {user?.result?._id === item.userId ? (
+                    <>
+                      {currentDate - moment(item.createdAt).format("D") <= 4 ||
+                      currentDate - moment(item.createdAt).format("D") >=
+                        -27 ? (
+                        <>
+                         <>
+                         
+      <Button style={{width:'12rem'}} variant="primary" onClick={handleShow}>
+       Current Invoice
+      </Button>
 
-                  </> : ""}
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Current Invoice</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <h6>{item.name}</h6>
+        <h6>{item.phone}</h6>
+        <h6>{item.address}</h6>
+        <h6> Your Cut :$10</h6>
+
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          {/* <Button variant="primary" onClick={handleClose}> */}
+            {/* Save Changes */}
+          {/* </Button> */}
+        </Modal.Footer>
+      </Modal>
+    </>
+                          {/* {moment(item.createdAt).format("D")} */}
+                          {/* {currentDate} */}
+                        </>
+                      ) : (
+                        ""
+                      )}
+                    </>
+                  ) : (
+                    ""
+                  )}
                   <p></p>
                 </>
               );

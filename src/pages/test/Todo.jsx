@@ -120,6 +120,8 @@ window.alert('are sure  you want to activate this user')
                 <h6 style={{}}>Reject user</h6>
               </button>
             </form> */}
+            <div className="line-sep"></div>
+
           </div>
         ))}
       </div>

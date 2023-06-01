@@ -74,7 +74,7 @@ const Pedding = () => {
           <button className="btn-admin" > <h6>Send notification</h6> </button>{" "}
 
           
-
+<div className="line-sep"></div>
         
       </div>
     ))}
