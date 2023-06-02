@@ -557,18 +557,18 @@ margin-left: 0 !important;
 @media (min-width: 1300px) {
   .exp h5{
     position: absolute;
-    top: 30rem !important;
+    top: 31rem !important;
     margin-top: 5rem;
   
   }
   .exp h2{
     position: absolute;
-    top: 28rem !important;
+    top: 29rem !important;
     margin-top: 1rem;
   }
   .exp h3{
     position: absolute;
-    top: 34rem !important;
+    top: 35rem !important;
     margin-top: 1rem;
   }
 }
@@ -2849,7 +2849,7 @@ color: #000;
 }
 .exp h2{
   position: absolute;
-  top: 29rem ;
+  top: 32rem ;
   margin-top: 1rem;
 }
 .exp h3{

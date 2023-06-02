@@ -58,11 +58,11 @@ const Main = () => {
       ) : (
         <>
           <div className="Main">
-            <Not/>
+            {/* <Not/> */}
             <div className="main-dash">
-              <div className="main-top">
+              <div className="main-top" >
                 {/* <App/> */}
-                <h3>
+                <h3 style={{marginBottom:'2rem',marginLeft:'.3rem', marginTop:''}}>
                   Welcome{" "}
                   {user?.result?.status === false &&
                     user?.result?.isComplete === true && (
@@ -71,14 +71,14 @@ const Main = () => {
                 </h3>
               </div>
 
-              <div className="Middle">
+              <div style={{marginLeft:'.7rem',marginRight:'.5rem'}} className="Middle">
                 <div className="middle-left">
                   <h3>Today's Profit</h3>
-                  <h1> ${users.length * 5}</h1>
+                  <h1> ${((5)/100)*35}</h1>
                 </div>
                 <div className="middle-right">
                   <h3>30 Today's Profit</h3>
-                  <h1>${users.length * 5 * 30}</h1>
+                  <h1>${((5)/100)*35 *30}</h1>
                 </div>
               </div>
               <div className="main-middle">
@@ -182,7 +182,7 @@ const Main = () => {
                   ""
                 )}
 
-                <div className="status-draw">
+                <div className="status-draw"  >
                   <div className="exp">
                     <img
                       className=""
@@ -191,7 +191,7 @@ const Main = () => {
                       alt=""
                     />
                     <h2>Current Rate:</h2>
-                    <h5>{(5 / 100) * 35 + 2}% & $2 </h5>
+                    <h5>{((users.length)/100)*35}% & ${((users.length)/100)*35 *30} </h5>
                     <h3>Top 30%</h3>
                   </div>
 
@@ -201,7 +201,7 @@ const Main = () => {
                         textAlign: "center",
                         fontSize: "1.4rem",
                         fontWeight: 100,
-                        marginTop: "1rem",
+                        marginTop: "2rem",
                       }}
                     >
                       Next boost in 30 orders
