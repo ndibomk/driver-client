@@ -25,7 +25,16 @@ overflow-x: hidden;
  gap: 2rem;
 }
 
+.popup{
+  height: 5rem ;
+  width: 5rem;
+  background-color: white;
+  display: flex;
+  flex-direction:column ;
+  margin:0 !important;
+  padding: 0 !important;
 
+}
 
 .MultiStepForm {
   width: 100% !important;
@@ -1708,6 +1717,7 @@ gap: 4rem;
   background-position: 5px 50%; /* adjust icon position */
   border: none;
   border-bottom: 1px solid #ccc;
+  padding-bottom: 1rem;
 }
 .input input[type="email"] {
   padding-left: 38px; /* add space for icon */
@@ -1717,6 +1727,8 @@ gap: 4rem;
   background-position: 5px 50%; /* adjust icon position */
   border: none;
   border-bottom: 1px solid #ccc;
+  padding-bottom: 1rem;
+
 }
 .input input[type="password"] {
   padding-left: 38px; /* add space for icon */
@@ -1735,6 +1747,8 @@ gap: 4rem;
   background-position: 5px 50%; /* adjust icon position */
   border: none;
   border-bottom: 1px solid #ccc;
+  padding-bottom: 1rem;
+
 }
 .reg-btn {
   height: 3rem;
@@ -1753,6 +1767,10 @@ gap: 4rem;
   border-radius: 1rem;
   border: none;
   background-color: rgb(187, 184, 184);
+  display: flex;
+  align-items: center;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
   /* transition: opacity 0.8s ease-in-out 1s; */
 }
 
@@ -2731,10 +2749,11 @@ textarea {
   gap: 1rem;
   padding-bottom: 0.8rem;
   
+  
 }
 .top{
   display: grid;
-  grid-template-columns: 1fr 1fr 2.7fr ;
+  grid-template-columns: .8fr 1fr 3fr ;
 color: #000;
 }
 .tops{
@@ -2751,7 +2770,7 @@ color: #000;
 }
 .pending-items{
   display: grid;
-  grid-template-columns: 2fr 2.5fr 1fr 1fr 1fr ;
+  grid-template-columns: 2fr 2.8fr 1fr 1fr 1fr ;
   width: 100%;
   /* align-content: center;
   justify-content: space-evenly; */
@@ -2769,9 +2788,32 @@ color: #000;
     padding-top: 1rem;
   
   }
+  .pending-btns{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    gap: 1rem;
+    padding-bottom: 0.8rem;
+    flex-wrap: wrap;
+    
+  }
+  .pending-items{
+    display: flex !important;
+flex-wrap: wrap !important;
+gap: 2rem !important;
+color: #000;
+padding-top: 1rem;
+  }
   .tops{
     display: flex !important;
+    gap: 1rem !important;
+   
+  }
+  .top{
+    display: flex;
     gap: 1rem;
+    padding-left: 1rem !important;
+    margin-left: 1rem !important;
   }
   .line-sep{
     width: 100%;
@@ -2782,7 +2824,14 @@ color: #000;
 }
 .pending-ite{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr  ;
+  color: #000;
+  padding-top: 1rem;
+
+}
+.pending-remove{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr ;
   color: #000;
   padding-top: 1rem;
 
@@ -3026,4 +3075,32 @@ gap: 4rem;
   color: white;
   border: none;
   border-radius: 3px;
+}
+
+
+.admin-btns{
+  display: flex;
+  align-content: center;
+  gap:1rem;
+  flex-wrap: wrap;
+}
+
+.admin-analytic{
+  background-color: #760945;
+  color: white;
+  border-radius: 7px;
+  border: none;
+}
+
+.Error{
+  background-position: center;
+  width: 100%;
+  height: 90vh;
+  background-image: url('https://www.hikashop.com/media/kunena/attachments/40127/11.jpg');
+}
+.home-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 30%;
 }

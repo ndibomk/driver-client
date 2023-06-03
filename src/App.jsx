@@ -33,6 +33,8 @@ import {
 import Protected from './Protected';
 import Control from './pages/review/Control';
 import Invoice from './pages/users/Invoice';
+import ActiveOrders from './pages/Orders/ActiveOrders';
+import Error from './pages/Error';
 function App() {
   
   const dispatch = useDispatch();
@@ -42,10 +44,38 @@ function App() {
     dispatch(setUser(user));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-console.log('user',user);
+  const [showPopup, setShowPopup] = useState(false);
+  const [language, setLanguage] = useState('');
+
+  useEffect(() => {
+    const hasVisitedBefore = localStorage.getItem('hasVisitedBefore');
+    if (!hasVisitedBefore) {
+      setShowPopup(true);
+    }
+  }, []);
+
+  const handleLanguageSelect = (selectedLanguage) => {
+    setLanguage(selectedLanguage);
+    setShowPopup(false);
+    localStorage.setItem('hasVisitedBefore', true);
+    // Perform language change logic here (e.g., update language context, Redux state, etc.)
+    // You may need to reload the page or re-render components to reflect the language change.
+  };
   return (
     <div className='' style={{width:'100%'}}>
       <BrowserRouter>
+      {/* <div className="popup"> */}
+      {/*  */}
+
+      {/* {showPopup && ( */}
+        {/* // <div className="popup"> */}
+          {/* <>Choose a Language</> */}
+          {/* <button onClick={() => handleLanguageSelect('English')}>English</button> */}
+          {/* <button onClick={() => handleLanguageSelect('Spanish')}>Spanish</button> */}
+        {/* </div> */}
+      {/* // )} */}
+      {/* Rest of your application */}
+    {/* </div> */}
     <ToastContainer/>
     {/* <Test/> */}
      <Header/>
@@ -54,6 +84,8 @@ console.log('user',user);
      <Routes>
      <Route path='/' element={<Home/>}/>
      <Route path='/review/:id' element={<Control/>}/>
+     <Route path='/active-orders' element={<ActiveOrders/>}/>
+     <Route path='*' element={<Error/>}/>
 
      <Route path='/admin' element={
       <Protected isLoggedIn={user}>

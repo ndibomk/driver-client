@@ -22,10 +22,18 @@ const videoConstraints = {
 const CustomerOrders = () => {
   const dispatch = useDispatch();
   const [picture, setPicture] = useState("");
+  const [cameraAllowed, setCameraAllowed] = useState(false);
+
   const webcamRef = React.useRef(null);
   const capture = React.useCallback(() => {
-    const pictureSrc = webcamRef.current.getScreenshot();
-    setPicture(pictureSrc);
+    try {
+      const pictureSrc = webcamRef.current.getScreenshot();
+      setPicture(pictureSrc);
+      setCameraAllowed(true);
+    } catch (error) {
+      setCameraAllowed(false);
+      console.error("Camera access denied:", error);
+    }
   });
   const { user } = useSelector((state) => ({ ...state.auth }));
   // const { id } = user?.result?._id;
@@ -54,6 +62,7 @@ const CustomerOrders = () => {
     return 0;
   }
   const [invoice, setInvoice] = useState([]);
+  const [invoice1, setInvoice1] = useState("");
   // console.log('invoices',invoice);
   useEffect(() => {
     async function fetchData() {
@@ -63,13 +72,34 @@ const CustomerOrders = () => {
         const result = res.data.filter((_, index) => index < 1);
 
         setInvoice(result);
-        console.log("results", result);
+        setInvoice1(result[0].address);
+        console.log("results", result[0].address);
       } catch (error) {
         console.log(error);
       }
     }
     fetchData();
   }, []);
+  const { userTours, loading } = useSelector((state) => ({ ...state.tour }));
+  const userId = user?.result?._id;
+
+  // const { id } = user?.result?._id;
+  const [userOrders, setUserOrders] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await axios.get(
+          `https://erytyu.onrender.com/products/userTours/${userId}`
+        );
+        setUserOrders(res.data);
+        console.log("useroders", userOrders);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+
   const [orders, setOrders] = useState([]);
   // useEffect(()=>{
   // if(invoice[0].userId===user?.result?._id){
@@ -94,7 +124,14 @@ const CustomerOrders = () => {
     lastname: "",
     address: "",
   };
+  const handleButtonClick = () => {
+    const address = invoice1; // Replace with your desired address
+    const encodedAddress = encodeURIComponent(address);
+    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+    window.location.href = mapsUrl;
+  };
 
+  // console.log('mapsUrl',invoice1);
   const [form, setForm] = useState(initialState);
 
   useEffect(() => {
@@ -121,6 +158,34 @@ const CustomerOrders = () => {
     setstarts(false);
     setfindull(true);
   };
+  const handlestarts0 = (e) => {
+    e.preventDefault();
+    setstarts(true);
+    setfindull(false);
+  };
+  const handlestarts1 = (e) => {
+    e.preventDefault();
+    setstarts(false);
+    setfindull(true);
+    setmaininfo(false);
+  };
+  const handlestarts2 = (e) => {
+    e.preventDefault();
+    setstarts(false);
+    setfindull(false);
+    setmaininfo(true);
+    setpics(false);
+  };
+
+  const handlestarts3 = (e) => {
+    e.preventDefault();
+    setstarts(false);
+    setfindull(false);
+    setmaininfo(false);
+    setpics(true);
+    sethomebase(false);
+  };
+
   const handlefinddull = (e) => {
     e.preventDefault();
     setfindull(false);
@@ -131,11 +196,29 @@ const CustomerOrders = () => {
     setmaininfo(false);
     setpics(true);
   };
+  const [driverName, setEmail] = useState("");
+  const [driverTell, setTell] = useState("");
+  useEffect(() => {
+    setForm((prevForm) => ({
+      ...prevForm,
+      driverName: user?.result?.name,
+      driverTell: user?.result?.tell,
+    }));
+  }, [driverName, driverTell]);
   const handlepics = (e) => {
     e.preventDefault();
-    dispatch(createProject({ ...form, toast }));
-    setpics(false);
-    sethomebase(true);
+    const updatedTourData = { ...form, driverName:user?.result?.name,driverTell: user?.result?.tell };
+
+    if (cameraAllowed === true) {
+      console.log("updated data", form);
+      dispatch(createProject({ ...form, toast }));
+      setpics(false);
+      sethomebase(true);
+    } else {
+      setpics(true);
+      sethomebase(false);
+      alert("camera not allowed you have to allow the camera first");
+    }
   };
   const handlehomebase = (e) => {
     e.preventDefault();
@@ -146,15 +229,13 @@ const CustomerOrders = () => {
     e.preventDefault();
     setlocation(false);
     setsharpening(true);
-        console.log('hello');
-
+    console.log("hello");
   };
   const handlesharpening = (e) => {
     e.preventDefault();
     setsharpening(false);
     setdelivery(true);
-            console.log(invoice[0].phone);
-
+    console.log(invoice[0].phone);
   };
   const handledelivery = (e) => {
     e.preventDefault();
@@ -215,6 +296,28 @@ const CustomerOrders = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleButtonClickModal = (e) => {
+    e.preventDefault()
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleCallButtonClick = () => {
+    const phoneNumber = '8916806'; // Replace with your desired phone number
+    const callUrl = `tel:${phoneNumber}`;
+    window.open(callUrl, '_blank');
+  };
+
+  const handleTextButtonClick = () => {
+    const phoneNumber = '8916806'; // Replace with your desired phone number
+    const textUrl = `sms:${phoneNumber}`;
+    window.open(textUrl, '_blank');
+  };
 
   const originalDate = "2023-05-20T09:46:57.706+00:00";
   const formattedDate = moment(originalDate).format("D");
@@ -225,66 +328,81 @@ const CustomerOrders = () => {
     <div style={{}} className="orders">
       {starts && (
         <>
-          <form onSubmit={handlestarts} className="start" id="forms">
-            <h2 style={{ fontSize: "1.4rem" }}>
-              Welcome
-              {/* <p>Original date: {originalDate}</p> */}
-              {/* <p>Formatted date: {currentDate - formattedDate}</p> */}
-              to company name
-            </h2>
-
-            {/* {id} */}
-            {/* {products.map((i) => {
-              return <>{i.name}</>;
-            })} */}
-            <p style={{ fontSize: "1rem" }}>
-              lets get you started on your journey to becoming an expert dull
-              hunter{" "}
-            </p>
-            <div style={{ marginTop: "120px" }}>
-              <button className="filled" type="submit">
-                I'm Ready!
-              </button>
-              <button className="unfilled">Later </button>
-            </div>
-          </form>
+          {/* {userOrders.length <= 3 ? ( */}
+            <form onSubmit={handlestarts} className="start" id="forms">
+              <h2 style={{ fontSize: "1.4rem" }}>
+                Welcome
+                {/* <p>Original date: {originalDate}</p> */}
+                {/* <p>Formatted date: {currentDate - formattedDate}</p> */}
+                DullDash
+              </h2>
+              {/* {id} */}
+              {/* {products.map((i) => {
+       return <>{i.name}</>;
+     })} */}
+              <p style={{ fontSize: "1rem" }}>
+                lets get you started on your journey {user?.result?.name}to
+                becoming an expert dull hunter{" "}
+              </p>
+              <div style={{ marginTop: "120px" }}>
+                <button className="filled" type="submit">
+                  I'm Ready!
+                </button>
+                <button className="unfilled">Later </button>
+              </div>
+            </form>
+          {/* ) : ( */}
+            {/* "" */}
+          {/* )} */}
         </>
       )}
 
       {finddull && (
         <>
-          <form
-            onSubmit={handlefinddull}
-            action=""
-            className="finddull"
-            id="forms"
-            style={{ color: "black" }}
-          >
-            <h2 style={{ fontSize: "1.4rem" }}>Lets hunt some dulls </h2>
-            <p style={{ fontSize: "1rem" }}>
-              The first step is to find a dull tool or blade!They can belong to
-              you,your neighbour a friend even a stranger.Everyone has dulls!
-            </p>
-            <p style={{ textAlign: "center" }}>Here are some ideas</p>
-            <p>
-              <p
-                style={{
-                  fontWeight: "bolder",
-                  textAlign: "center",
-                  fontSize: "1.3rem",
-                }}
-              >
-                Knives &nbsp; &nbsp; scissors &nbsp; &nbsp; Garden tools <br />{" "}
-                Lawn mower blades &nbsp; & so many more
-              </p>
-            </p>
-            <button
-              style={{ width: "180px", fontSize: "1rem" }}
-              className="filled"
+          {/* {userOrders.length <= 3 ? ( */}
+            <form
+              onSubmit={handlefinddull}
+              action=""
+              className="finddull"
+              id="forms"
+              style={{ color: "black" }}
             >
-              I've found a dull
-            </button>
-          </form>
+              <h2 style={{ fontSize: "1.4rem" }}>Lets hunt some dulls </h2>
+              <p style={{ fontSize: "1rem" }}>
+                The first step is to find a dull tool or blade!They can belong
+                to you,your neighbour a friend even a stranger.Everyone has
+                dulls!
+              </p>
+              <p style={{ textAlign: "center" }}>Here are some ideas</p>
+              <p>
+                <p
+                  style={{
+                    fontWeight: "bolder",
+                    textAlign: "center",
+                    fontSize: "1.3rem",
+                  }}
+                >
+                  Knives &nbsp; &nbsp; scissors &nbsp; &nbsp; Garden tools{" "}
+                  <br /> Lawn mower blades &nbsp; & so many more
+                </p>
+              </p>
+              <button
+                style={{ width: "180px", fontSize: "1rem" }}
+                className="filled"
+              >
+                I've found a dull
+              </button>
+              <button
+                style={{ width: "180px", fontSize: "1rem" }}
+                className="filled"
+                onClick={handlestarts0}
+              >
+                back
+              </button>
+            </form>
+          {/* ) : ( */}
+            {/* "" */}
+          {/* )} */}
         </>
       )}
 
@@ -305,6 +423,7 @@ const CustomerOrders = () => {
             <div className="infocollection">
               <div className="infodiv">
                 <input
+                  required
                   onChange={(e) =>
                     setForm({ ...form, firstname: e.target.value })
                   }
@@ -312,6 +431,7 @@ const CustomerOrders = () => {
                   placeholder="First name"
                 />
                 <input
+                  required
                   onChange={(e) =>
                     setForm({ ...form, lastname: e.target.value })
                   }
@@ -321,11 +441,13 @@ const CustomerOrders = () => {
               </div>
               <div className="infodiv">
                 <input
+                  required
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   type="number"
                   placeholder="Phone number"
                 />
                 <input
+                  required
                   onChange={(e) =>
                     setForm({ ...form, address: e.target.value })
                   }
@@ -335,6 +457,13 @@ const CustomerOrders = () => {
               </div>
             </div>
             <button className="filled">Next </button>
+            <button
+              style={{ width: "180px", fontSize: "1rem" }}
+              className="filled"
+              onClick={handlestarts1}
+            >
+              back
+            </button>
           </form>
         </>
       )}
@@ -394,29 +523,47 @@ const CustomerOrders = () => {
             <button style={{ marginTop: "" }} className="filled">
               Next
             </button>
+            <button
+              onClick={handlestarts2}
+              style={{ marginTop: "" }}
+              className="filled"
+            >
+              Back
+            </button>
           </form>
         </>
       )}
 
       {homebase && (
         <>
-          <form
-            action=""
-            onSubmit={handlehomebase}
-            className="homebase"
-            id="forms"
-          >
-            <h2>To home base</h2>
-            <p>you're on roll!now lets bring the dulls to the home Base</p>
-            <p>
-              Even though they are dull,Sharp objects and tools,they should be
-              well secured ,and placed so they will not hit the driver in the
-              event of a crash
-            </p>
-            <button style={{ marginTop: "70px" }} className="filled">
-              Next
-            </button>
-          </form>
+          {/* {userOrders.length <= 3 ? ( */}
+            <form
+              action=""
+              onSubmit={handlehomebase}
+              className="homebase"
+              id="forms"
+            >
+              <h2>To home base</h2>
+              <p>you're on roll!now lets bring the dulls to the home Base</p>
+              <p>
+                Even though they are dull,Sharp objects and tools,they should be
+                well secured ,and placed so they will not hit the driver in the
+                event of a crash
+              </p>
+              <button style={{ marginTop: "70px" }} className="filled">
+                Next
+              </button>
+              <button
+                onClick={handlestarts3}
+                style={{ marginTop: "70px" }}
+                className="filled"
+              >
+                Back
+              </button>
+            </form>
+          {/* ) : ( */}
+            {/* "" */}
+          {/* )} */}
         </>
       )}
 
@@ -431,8 +578,9 @@ const CustomerOrders = () => {
             <h2>To home base</h2>
             <p>Homebase is located at</p>
             <div className="homebaselink">
-              <a href="">5002 Fawn Lake DR </a> <br />
-              <a href="">San Antonio TX 76244</a> <br />
+              {invoice.map((i) => {
+                return <a href="">{i.address} </a>;
+              })}
             </div>
             <button style={{ marginTop: "70px" }} className="filled">
               Ive arrived!
@@ -458,33 +606,38 @@ const CustomerOrders = () => {
                       currentDate - moment(item.createdAt).format("D") >=
                         -27 ? (
                         <>
-                         <>
-                         
-      <Button style={{width:'12rem'}} variant="primary" onClick={handleShow}>
-       Current Invoice
-      </Button>
+                          <>
+                            <Button
+                              style={{ width: "12rem" }}
+                              variant="primary"
+                              onClick={handleShow}
+                            >
+                              Current Invoice
+                            </Button>
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Current Invoice</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <h6>{item.name}</h6>
-        <h6>{item.phone}</h6>
-        <h6>{item.address}</h6>
-        <h6> Your Cut :$10</h6>
-
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          {/* <Button variant="primary" onClick={handleClose}> */}
-            {/* Save Changes */}
-          {/* </Button> */}
-        </Modal.Footer>
-      </Modal>
-    </>
+                            <Modal show={show} onHide={handleClose}>
+                              <Modal.Header closeButton>
+                                <Modal.Title>Current Invoice</Modal.Title>
+                              </Modal.Header>
+                              <Modal.Body>
+                                <h6>{item.name}</h6>
+                                <h6>{item.phone}</h6>
+                                <h6>{item.address}</h6>
+                                <h6> Your Cut :$10</h6>
+                              </Modal.Body>
+                              <Modal.Footer>
+                                <Button
+                                  variant="secondary"
+                                  onClick={handleClose}
+                                >
+                                  Close
+                                </Button>
+                                {/* <Button variant="primary" onClick={handleClose}> */}
+                                {/* Save Changes */}
+                                {/* </Button> */}
+                              </Modal.Footer>
+                            </Modal>
+                          </>
                           {/* {moment(item.createdAt).format("D")} */}
                           {/* {currentDate} */}
                         </>
@@ -534,7 +687,16 @@ const CustomerOrders = () => {
             </p>
 
             <p>As a reminder you picked up this tools from </p>
-            <p>customer address for orders</p>
+            <p>
+              {" "}
+              {invoice.map((i) => {
+                return <a href="">{i.address} </a>;
+              })}
+            </p>
+            <button onClick={handleButtonClick} className="filled">
+              Navigate
+            </button>
+
             <button className="filled">Delivered!</button>
           </form>
         </>
@@ -542,7 +704,7 @@ const CustomerOrders = () => {
 
       {zelle && (
         <>
-          <form action="" id="forms" onSubmit={handlezelle} className="zelle">
+          <form action="" id="forms"  className="zelle">
             <h1>Its that easy</h1>
             <p>You have succesfully completed your interview Drive</p>
             <p>
@@ -554,15 +716,33 @@ const CustomerOrders = () => {
               dashboard
             </p>
             <div style={{ marginTop: "30px" }}>
-              <button className="filled" type="submit">
+              <button onClick={handlezelle} className="filled" type="submit">
                 Next!
               </button>
-              <button style={{ width: "150px" }} className="unfilled">
+              
+              
+              <button onClick={handleButtonClickModal} style={{ width: "150px" }} className="unfilled">
                 {" "}
                 I dont have Zelle!
               </button>
+              
+              <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Choose your altenantive</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <button onClick={handleCallButtonClick}>Call Number</button>
+      <button onClick={handleTextButtonClick}>Text Number</button>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
             </div>
           </form>
+          
         </>
       )}
 

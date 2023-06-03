@@ -74,11 +74,11 @@ const Main = () => {
               <div style={{marginLeft:'.7rem',marginRight:'.5rem'}} className="Middle">
                 <div className="middle-left">
                   <h3>Today's Profit</h3>
-                  <h1> ${((5)/100)*35}</h1>
+                  <h1> ${(((5)/100)*35).toFixed(1)}</h1>
                 </div>
                 <div className="middle-right">
                   <h3>30 Today's Profit</h3>
-                  <h1>${((5)/100)*35 *30}</h1>
+                  <h1>${(((5)/100)*35 *30).toFixed(1)}</h1>
                 </div>
               </div>
               <div className="main-middle">

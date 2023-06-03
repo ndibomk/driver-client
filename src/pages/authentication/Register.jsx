@@ -14,9 +14,36 @@ function MultiStepForm() {
   console.log("status", loading);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [inputValue, setInputValue] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+    setErrorMessage('');
+  };
+
+  const numberRange = Array.from({ length: 78299 - 78201 + 1 }, (_, index) => index + 78201)
+  .filter((number) => number !== 78234 && number !== 78236);
+
+  console.log('range',numberRange);
+
   const handleNext = (e) => {
     e.preventDefault();
-    setStep(step + 1);
+
+    if (inputValue === '') {
+      setErrorMessage('Please enter a number.');
+    } else {
+      const number = parseInt(inputValue, 10);
+      if (numberRange.includes(number)) {
+        // Number is within the range, do something
+        setStep(step + 1);
+        toast.success('Zip code is within the range')
+
+      } else {
+        toast.error('Invalid number. Please enter a number within the range.');
+      }
+    }
+
   };
   const handlePrev = (e) => {
     e.preventDefault();
@@ -26,13 +53,16 @@ function MultiStepForm() {
     e.preventDefault();
     setStep(step + 4);
   };
-
+const EmailNext=()=>{
+setStep(step+1)
+}
   const [email, setEmail] = useState("");
   const [tell, setTell] = useState("");
   const initialValues = {
     firstname: "",
     lastname: "",
     password: "",
+    confirmPassword:'',
     task:''
   };
 
@@ -57,7 +87,9 @@ function MultiStepForm() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    if (form.task !== form.confirmPassword) {
+      return toast.error("Password should match");
+    }
     dispatch(register({ form, navigate, toast }));
   };
   const [formValue, setUser] = useState(initialState);
@@ -83,20 +115,29 @@ function MultiStepForm() {
           <div className="register">
             <h3 style={{ marginTop: "4.8rem" }}>
               Sign up to be a driver
+      
+      
+      
+      
+    
+
               {/* {user.loading===true ? 'hello':'hii'} */}
             </h3>
-            <form className="form">
+            <form onSubmit={handleNext} className="form">
               <div className="input">
                 <span>
-                  <MdLocationOn style={{ background: "" }} />
+                  <MdLocationOn style={{ marginBottom:'.6rem' }} />
                 </span>
                 <input
-                  type="text"
+                  type="number"
+                  required
+                  value={inputValue}
+                  onChange={handleInputChange}
                   placeholder=" &nbsp; Your postal code/ zip code"
                 />
               </div>
 
-              <button onClick={handleNext} className="reg-btn">
+              <button  className="reg-btn">
                 Start earning Today
               </button>
               <button onClick={handleLogin} className="reg-btns">
@@ -107,17 +148,18 @@ function MultiStepForm() {
         )}
         {step === 2 && (
           <div className="register">
-            <form className="form">
+            <form onSubmit={EmailNext} className="form">
               <h3 style={{ marginBottom: "1.6rem" }}>Sign up to be a driver</h3>
 
               <div style={{ marginBottom: "2rem" }} className="input">
                 <span>
-                  <MdEmail style={{ background: "" }} />
+                  <MdEmail style={{ marginBottom:'.6rem' }} />
                 </span>
                 <input
                   onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   placeholder=" &nbsp; Email Address"
+                  required
                 />
               </div>
               <div style={{ marginBottom: "3rem" }} className="next-reg">
@@ -132,8 +174,9 @@ function MultiStepForm() {
                 </div>
 
                 <button
+                type="submit"
                   style={{ marginBottom: "" }}
-                  onClick={(e) => setStep(step + 1)}
+                  // onClick={EmailNext}
                   className="regbtnnext"
                 >
                   Next
@@ -145,19 +188,20 @@ function MultiStepForm() {
         <div className="Card"></div>
         {step === 3 && (
           <div className="register">
-            <form className="form">
+            <form onSubmit={handleNext} className="form">
               <h3 style={{ marginBottom: "1.6rem" }}>
                 Sign up to become a driver{" "}
               </h3>
 
               <div style={{ marginBottom: "2rem" }} className="input">
                 <span>
-                  <FaPhoneAlt style={{ background: "" }} />
+                  <FaPhoneAlt style={{ marginBottom:'.6rem' }} />
                 </span>
                 <input
                   onChange={(e) => setTell(e.target.value)}
                   type="number"
                   placeholder=" &nbsp; Your phone number"
+                  required
                 />
               </div>
               <div style={{ marginBottom: "3rem" }} className="next-reg">
@@ -171,7 +215,7 @@ function MultiStepForm() {
                   />
                 </div>
 
-                <button onClick={handleNext} className="regbtnnext">
+                <button  className="regbtnnext">
                   Next
                 </button>
               </div>
@@ -190,6 +234,7 @@ function MultiStepForm() {
               <div style={{ marginTop: "0rem" }} className="input">
                 <input
                   type="text"
+                  required
                   onChange={(e) =>
                     setForm({ ...form, firstname: e.target.value })
                   }
@@ -198,6 +243,7 @@ function MultiStepForm() {
               </div>
               <div className="input">
                 <input
+                required
                   type="text"
                   onChange={(e) =>
                     setForm({ ...form, lastname: e.target.value })
@@ -222,7 +268,11 @@ function MultiStepForm() {
                 <span>
                   <SlKey style={{ background: "" }} />
                 </span>
-                <input type="password" placeholder=" &nbsp; Confirm Password" />
+                <input required type="password" placeholder=" &nbsp; Confirm Password"
+                onChange={(e) =>
+                  setForm({ ...form, confirmPassword: e.target.value })
+                }
+                />
               </div>
               <div className="next-reg">
                 <div className="icon">
@@ -252,7 +302,7 @@ function MultiStepForm() {
                 <form onSubmit={handleSubmit1} className="form">
                   <div className="input">
                     <span>
-                      <MdEmail style={{ background: "" }} />
+                      <MdEmail style={{ background: "", marginBottom:'.6rem' }} />
                     </span>
                     <input
                       type="email"
@@ -264,7 +314,7 @@ function MultiStepForm() {
                   </div>
                   <div className="input">
                     <span>
-                      <SlKey style={{ background: "" }} />
+                      <SlKey style={{ marginBottom:'.6rem' }} />
                     </span>
                     <input
                       type="password"

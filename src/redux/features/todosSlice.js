@@ -42,7 +42,18 @@ export const getTodos = createAsyncThunk(
     }
   }
 );
-
+export const getTodos1 = createAsyncThunk(
+  "todos/getTodos",
+  async (id = null, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(baseURL1 + "succes");
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response?.data);
+    }
+  }
+);
 export const deleteTodo = createAsyncThunk(
   "todos/deleteTodo",
   async (id, { rejectWithValue }) => {
@@ -70,7 +81,7 @@ export const updateTodo = createAsyncThunk(
         date,
         uid,
       });
-      toast.success("user rejected Successfully");
+      toast.error("user deactivated Successfully");
 
       return response.data;
     } catch (error) {

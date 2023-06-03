@@ -66,7 +66,7 @@ function Questions() {
         <div className="questions">
           <div className="quiz-content">
             <div className="question-title">
-              <p>Who are we?</p>
+              <p>Who are we ?</p>
               <h2 onClick={handleQuestion1Click}>
                 {showAnswer1 ? <AiOutlineMinus /> : <AiOutlinePlus size={25} />}
               </h2>
@@ -81,7 +81,7 @@ function Questions() {
 
           <div className="quiz-content">
             <div className="question-title">
-              <p>"How do I get started?</p>
+              <p>How do I get started ?</p>
               <h2 onClick={handleQuestion2Click}>
                 {showAnswer2 ? <AiOutlineMinus /> : <AiOutlinePlus size={25} />}
               </h2>
@@ -97,7 +97,7 @@ function Questions() {
           <hr />
           <div className="quiz-content">
             <div className="question-title">
-              <p>How will I get paid?</p>
+              <p>How will I get paid ?</p>
               <h2 onClick={handleQuestion3Click}>
                 {showAnswer3 ? <AiOutlineMinus /> : <AiOutlinePlus size={25} />}
               </h2>
@@ -111,7 +111,7 @@ function Questions() {
           <hr />
           <div className="quiz-content">
             <div className="question-title">
-              <p>Do I need any special documentation?</p>
+              <p>Do I need any special documentation ?</p>
               <h2 onClick={handleQuestion4Click}>
                 {showAnswer4 ? <AiOutlineMinus /> : <AiOutlinePlus size={25} />}
               </h2>

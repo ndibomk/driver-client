@@ -15,10 +15,10 @@ const ListTodos = () => {
     status: false,
     isComplete: false,
   });
-  const [reject, setreject] = useState({
-    
-    status: false,
-  });
+  
+  
+  
+  
   const dispatch = useDispatch();
   const todosState = useSelector((state) => state.todosState);
   const { todos } = todosState;

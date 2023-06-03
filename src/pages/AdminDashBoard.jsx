@@ -50,17 +50,24 @@ const AdminDashBoard = () => {
       <div className="trapezoid"></div>
 
       <div className="table-content">
-        <Link to="/analytics">
-          <button className="admin-analytics">Analytics</button>
-        </Link>
+        <div className="admin-btns">
+          <Link to="/analytics">
+            <button className="admin-analytics">Analytics</button>
+          </Link>
+          <Link to="/active-orders">
+            <button style={{ width: "10rem" }} className="admin-analytic">
+              Active Orders
+            </button>
+          </Link>
+        </div>
 
         <div className="table-controls">
           <div className="set">
             <div style={{ paddingLeft: "2px" }} className="admin-table">
               {/* <div className={`my-button isActive ? 'active' : 'inactive'`}> */}
-                <Link style={{ textDecoration: "none" }} to="/admin">
-                  <h4>Active Users</h4>
-                </Link>
+              <Link style={{ textDecoration: "none" }} to="/admin">
+                <h4>Active Users</h4>
+              </Link>
               {/* </div> */}
 
               <div className="line-admin"></div>
@@ -80,7 +87,6 @@ const AdminDashBoard = () => {
           </div>
           <Outlet />
         </div>
-        
       </div>
     </div>
   );

@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { deleteTodo } from "../../redux/features/todosSlice";
 
 const Pedding = () => {
   // const usersData = [
@@ -23,6 +25,14 @@ const Pedding = () => {
     }
     return 0;
   }
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleDelete = (id) => {
+    alert('are you sure you want to delete this user')
+    dispatch(deleteTodo(id));
+    navigate("/admin/rejected");
+  };
 
   useEffect(() => {
   async function fetchData() {
@@ -64,9 +74,15 @@ const Pedding = () => {
 
         
        
-
+                  <button
+   className="btn-admin"
+   type="submit"
+   onClick={() => handleDelete(todo._id)}
+ >
+   <h6 style={{}}>Remove a user</h6>
+ </button>
          
-          <button className="btn-admin" > <h6>Send notification</h6> </button>{" "}
+          {/* <button className="btn-admin" > <h6>Send notification</h6> </button>{" "} */}
 
           <div className="line-sep"></div>
 
