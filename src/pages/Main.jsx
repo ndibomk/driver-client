@@ -191,7 +191,7 @@ const Main = () => {
                       alt=""
                     />
                     <h2>Current Rate:</h2>
-                    <h5>{((users.length)/100)*35}% & ${((users.length)/100)*35 *30} </h5>
+                    <h5>{(((users.length)/100)*35).toFixed(1)}% & ${(((users.length)/100)*35 *30).toFixed(1)} </h5>
                     <h3>Top 30%</h3>
                   </div>
 

@@ -9,10 +9,11 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { createProject } from "../../redux/features/productSlice";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import AddTodo from "../review/Review";
-import App from "../review/RevMain";
+// import App from "../review/RevMain";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
+import App from "../review/RevMain";
 const WebcamComponent = () => <Webcam />;
 const videoConstraints = {
   width: 200,
@@ -176,13 +177,89 @@ const CustomerOrders = () => {
     setmaininfo(true);
     setpics(false);
   };
-
+  const handlestarts4 = (e) => {
+    e.preventDefault();
+    setstarts(false);
+    setfindull(false);
+    setmaininfo(false);
+    setpics(false);
+    sethomebase(true);
+    setlocation(false);
+    setsharpening(false);
+  };
+  const handlestarts5 = (e) => {
+    e.preventDefault();
+    setstarts(false);
+    setfindull(false);
+    setmaininfo(false);
+    setpics(false);
+    setlocation(true);
+    setsharpening(false);
+  };
+  const handlestarts6 = (e) => {
+    e.preventDefault();
+    setstarts(false);
+    setfindull(false);
+    setmaininfo(false);
+    setpics(false);
+    setlocation(false);
+    setsharpening(true);
+    setdelivery(false);
+  };
+  const handlestarts7 = (e) => {
+    e.preventDefault();
+    setstarts(false);
+    setfindull(false);
+    setmaininfo(false);
+    setpics(false);
+    setlocation(false);
+    setsharpening(false);
+    setdelivery(true);
+    setzelle(false);
+  };
+  const handlestarts8 = (e) => {
+    e.preventDefault();
+    setstarts(false);
+    setfindull(false);
+    setmaininfo(false);
+    setpics(false);
+    setlocation(false);
+    setsharpening(false);
+    setdelivery(true);
+    setrating(false);
+  };
+  const handlestarts9 = (e) => {
+    e.preventDefault();
+    setstarts(false);
+    setfindull(false);
+    setmaininfo(false);
+    setpics(false);
+    setlocation(false);
+    setsharpening(false);
+    setdelivery(false);
+    setrating(true);
+    setprocess(false);
+  };
+  const handlestarts10 = (e) => {
+    e.preventDefault();
+    setstarts(false);
+    setfindull(false);
+    setmaininfo(false);
+    setpics(false);
+    setlocation(false);
+    setsharpening(false);
+    setdelivery(false);
+    setrating(false);
+    setprocess(true);
+    setfeedback(false);
+  };
   const handlestarts3 = (e) => {
     e.preventDefault();
     setstarts(false);
     setfindull(false);
     setmaininfo(false);
     setpics(true);
+
     sethomebase(false);
   };
 
@@ -207,7 +284,11 @@ const CustomerOrders = () => {
   }, [driverName, driverTell]);
   const handlepics = (e) => {
     e.preventDefault();
-    const updatedTourData = { ...form, driverName:user?.result?.name,driverTell: user?.result?.tell };
+    const updatedTourData = {
+      ...form,
+      driverName: user?.result?.name,
+      driverTell: user?.result?.tell,
+    };
 
     if (cameraAllowed === true) {
       console.log("updated data", form);
@@ -299,7 +380,7 @@ const CustomerOrders = () => {
   const [showModal, setShowModal] = useState(false);
 
   const handleButtonClickModal = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     setShowModal(true);
   };
 
@@ -308,15 +389,15 @@ const CustomerOrders = () => {
   };
 
   const handleCallButtonClick = () => {
-    const phoneNumber = '8916806'; // Replace with your desired phone number
+    const phoneNumber = "8916806"; // Replace with your desired phone number
     const callUrl = `tel:${phoneNumber}`;
-    window.open(callUrl, '_blank');
+    window.open(callUrl, "_blank");
   };
 
   const handleTextButtonClick = () => {
-    const phoneNumber = '8916806'; // Replace with your desired phone number
+    const phoneNumber = "8916806"; // Replace with your desired phone number
     const textUrl = `sms:${phoneNumber}`;
-    window.open(textUrl, '_blank');
+    window.open(textUrl, "_blank");
   };
 
   const originalDate = "2023-05-20T09:46:57.706+00:00";
@@ -328,31 +409,36 @@ const CustomerOrders = () => {
     <div style={{}} className="orders">
       {starts && (
         <>
+          {/* <App/> */}
           {/* {userOrders.length <= 3 ? ( */}
-            <form onSubmit={handlestarts} className="start" id="forms">
-              <h2 style={{ fontSize: "1.4rem" }}>
-                Welcome
-                {/* <p>Original date: {originalDate}</p> */}
-                {/* <p>Formatted date: {currentDate - formattedDate}</p> */}
-                DullDash
-              </h2>
-              {/* {id} */}
-              {/* {products.map((i) => {
+          <form onSubmit={handlestarts} className="start" id="forms">
+            <h2 style={{ fontSize: "1.4rem" }}>
+              Welcome
+              {/* <p>Original date: {originalDate}</p> */}
+              {/* <p>Formatted date: {currentDate - formattedDate}</p> */}
+              DullDash
+            </h2>
+            {/* <App/> */}
+            {/* {id} */}
+            {/* {products.map((i) => {
        return <>{i.name}</>;
      })} */}
-              <p style={{ fontSize: "1rem" }}>
-                lets get you started on your journey {user?.result?.name}to
-                becoming an expert dull hunter{" "}
-              </p>
-              <div style={{ marginTop: "120px" }}>
-                <button className="filled" type="submit">
-                  I'm Ready!
-                </button>
-                <button className="unfilled">Later </button>
-              </div>
-            </form>
+            <p style={{ fontSize: "1rem" }}>
+              lets get you started on your journey {user?.result?.name}to
+              becoming an expert dull hunter{" "}
+            </p>
+            <div style={{ marginTop: "120px" }}>
+              <button className="filled" type="submit">
+                I'm Ready!
+              </button>
+              <Link to='/dashboard'>
+              <button className="unfilled">Later </button>
+
+              </Link>
+            </div>
+          </form>
           {/* ) : ( */}
-            {/* "" */}
+          {/* "" */}
           {/* )} */}
         </>
       )}
@@ -360,48 +446,47 @@ const CustomerOrders = () => {
       {finddull && (
         <>
           {/* {userOrders.length <= 3 ? ( */}
-            <form
-              onSubmit={handlefinddull}
-              action=""
-              className="finddull"
-              id="forms"
-              style={{ color: "black" }}
+          <form
+            onSubmit={handlefinddull}
+            action=""
+            className="finddull"
+            id="forms"
+            style={{ color: "black" }}
+          >
+            <h2 style={{ fontSize: "1.4rem" }}>Lets hunt some dulls </h2>
+            <p style={{ fontSize: "1rem" }}>
+              The first step is to find a dull tool or blade!They can belong to
+              you,your neighbour a friend even a stranger.Everyone has dulls!
+            </p>
+            <p style={{ textAlign: "center" }}>Here are some ideas</p>
+            <p>
+              <p
+                style={{
+                  fontWeight: "bolder",
+                  textAlign: "center",
+                  fontSize: "1.3rem",
+                }}
+              >
+                Knives &nbsp; &nbsp; scissors &nbsp; &nbsp; Garden tools <br />{" "}
+                Lawn mower blades &nbsp; & so many more
+              </p>
+            </p>
+            <button
+              style={{ width: "180px", fontSize: "1rem" }}
+              className="filled"
             >
-              <h2 style={{ fontSize: "1.4rem" }}>Lets hunt some dulls </h2>
-              <p style={{ fontSize: "1rem" }}>
-                The first step is to find a dull tool or blade!They can belong
-                to you,your neighbour a friend even a stranger.Everyone has
-                dulls!
-              </p>
-              <p style={{ textAlign: "center" }}>Here are some ideas</p>
-              <p>
-                <p
-                  style={{
-                    fontWeight: "bolder",
-                    textAlign: "center",
-                    fontSize: "1.3rem",
-                  }}
-                >
-                  Knives &nbsp; &nbsp; scissors &nbsp; &nbsp; Garden tools{" "}
-                  <br /> Lawn mower blades &nbsp; & so many more
-                </p>
-              </p>
-              <button
-                style={{ width: "180px", fontSize: "1rem" }}
-                className="filled"
-              >
-                I've found a dull
-              </button>
-              <button
-                style={{ width: "180px", fontSize: "1rem" }}
-                className="filled"
-                onClick={handlestarts0}
-              >
-                back
-              </button>
-            </form>
+              I've found a dull
+            </button>
+            <button
+              style={{ width: "180px", fontSize: "1rem" }}
+              className="filled"
+              onClick={handlestarts0}
+            >
+              back
+            </button>
+          </form>
           {/* ) : ( */}
-            {/* "" */}
+          {/* "" */}
           {/* )} */}
         </>
       )}
@@ -537,32 +622,32 @@ const CustomerOrders = () => {
       {homebase && (
         <>
           {/* {userOrders.length <= 3 ? ( */}
-            <form
-              action=""
-              onSubmit={handlehomebase}
-              className="homebase"
-              id="forms"
+          <form
+            action=""
+            onSubmit={handlehomebase}
+            className="homebase"
+            id="forms"
+          >
+            <h2>To home base</h2>
+            <p>you're on roll!now lets bring the dulls to the home Base</p>
+            <p>
+              Even though they are dull,Sharp objects and tools,they should be
+              well secured ,and placed so they will not hit the driver in the
+              event of a crash
+            </p>
+            <button style={{ marginTop: "70px" }} className="filled">
+              Next
+            </button>
+            <button
+              onClick={handlestarts3}
+              style={{ marginTop: "70px" }}
+              className="filled"
             >
-              <h2>To home base</h2>
-              <p>you're on roll!now lets bring the dulls to the home Base</p>
-              <p>
-                Even though they are dull,Sharp objects and tools,they should be
-                well secured ,and placed so they will not hit the driver in the
-                event of a crash
-              </p>
-              <button style={{ marginTop: "70px" }} className="filled">
-                Next
-              </button>
-              <button
-                onClick={handlestarts3}
-                style={{ marginTop: "70px" }}
-                className="filled"
-              >
-                Back
-              </button>
-            </form>
+              Back
+            </button>
+          </form>
           {/* ) : ( */}
-            {/* "" */}
+          {/* "" */}
           {/* )} */}
         </>
       )}
@@ -584,6 +669,13 @@ const CustomerOrders = () => {
             </div>
             <button style={{ marginTop: "70px" }} className="filled">
               Ive arrived!
+            </button>
+            <button
+              onClick={handlestarts4}
+              style={{ marginTop: "70px" }}
+              className="filled"
+            >
+              Back
             </button>
           </form>
         </>
@@ -665,6 +757,13 @@ const CustomerOrders = () => {
             <button style={{ marginTop: "60px" }} className="filled">
               Next
             </button>
+            <button
+              onClick={handlestarts5}
+              style={{ marginTop: "60px" }}
+              className="filled"
+            >
+              Back
+            </button>
           </form>
         </>
       )}
@@ -693,6 +792,9 @@ const CustomerOrders = () => {
                 return <a href="">{i.address} </a>;
               })}
             </p>
+            <button onClick={handlestarts6} className="filled">
+              Back
+            </button>
             <button onClick={handleButtonClick} className="filled">
               Navigate
             </button>
@@ -704,7 +806,7 @@ const CustomerOrders = () => {
 
       {zelle && (
         <>
-          <form action="" id="forms"  className="zelle">
+          <form action="" id="forms" className="zelle">
             <h1>Its that easy</h1>
             <p>You have succesfully completed your interview Drive</p>
             <p>
@@ -716,90 +818,68 @@ const CustomerOrders = () => {
               dashboard
             </p>
             <div style={{ marginTop: "30px" }}>
+              <button onClick={handlestarts7} className="filled" type="submit">
+                Back
+              </button>
               <button onClick={handlezelle} className="filled" type="submit">
                 Next!
               </button>
-              
-              
-              <button onClick={handleButtonClickModal} style={{ width: "150px" }} className="unfilled">
+
+              <button
+                onClick={handleButtonClickModal}
+                style={{ width: "150px" }}
+                className="unfilled"
+              >
                 {" "}
                 I dont have Zelle!
               </button>
-              
+
               <Modal show={showModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Choose your altenantive</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <button onClick={handleCallButtonClick}>Call Number</button>
-      <button onClick={handleTextButtonClick}>Text Number</button>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+                <Modal.Header closeButton>
+                  <Modal.Title>Choose your altenantive</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <button onClick={handleCallButtonClick}>Call Number</button>
+                  <button onClick={handleTextButtonClick}>Text Number</button>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleCloseModal}>
+                    Close
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </div>
           </form>
-          
         </>
       )}
 
       {rating && (
         <>
-          <form action="" onSubmit={handlerating} className="rating" id="forms">
+          <div action=""  className="rating" id="forms">
             <h1>Want to add onother $ ammount</h1>
             <p>Just take 30 seconds to give us some feedback! </p>
             <h5>How would you rate this delivery?</h5>
-            <div className="item-starts">
-              <div>
-                {" "}
-                <AiFillStar
-                  className={`star ${clicked1 ? "clicked1" : ""}`}
-                  onClick={handleClick1}
-                />
-              </div>
-              <div>
-                {" "}
-                <AiFillStar
-                  className={`star ${clicked2 ? "clicked2" : ""}`}
-                  onClick={handleClick2}
-                />
-              </div>
-
-              <div>
-                {" "}
-                <AiFillStar
-                  className={`star ${clicked3 ? "clicked3" : ""}`}
-                  onClick={handleClick3}
-                />
-              </div>
-              <div>
-                {" "}
-                <AiFillStar
-                  className={`star ${clicked4 ? "clicked4" : ""}`}
-                  onClick={handleClick4}
-                />
-              </div>
-              <div>
-                {" "}
-                <AiFillStar
-                  className={`star ${clicked5 ? "clicked5" : ""}`}
-                  onClick={handleClick5}
-                />
-              </div>
+            <div className="item-startsss">
+              <App />
             </div>
 
-            <br />
-            <button style={{ marginTop: "70px" }} className="filled">
+           
+            <button onClick={handlerating} style={{ marginTop: "70px" }} className="filled">
               {" "}
               No thanks
+            </button>
+            <button
+              onClick={handlestarts8}
+              style={{ marginTop: "70px" }}
+              className="filled"
+            >
+              {" "}
+              Back
             </button>
             {products.map((i) => {
               return <>{i._id}</>;
             })}
-          </form>
+          </div>
         </>
       )}
 
@@ -815,6 +895,14 @@ const CustomerOrders = () => {
             <p>Just take 30 seconds to give us some feedback! </p>
             <h5>Does the process make sense?</h5>
             <div style={{ marginTop: "40px" }}>
+              <button
+                style={{ float: "none" }}
+                type="submit"
+                className="filled"
+                onClick={handlestarts9}
+              >
+                Back
+              </button>
               <button
                 style={{ float: "none" }}
                 type="submit"
@@ -852,7 +940,16 @@ const CustomerOrders = () => {
               cols="25"
               placeholder="Feedback..."
             ></textarea>
+            <div style={{display:"flex"}}>
             <button className="filled">Done</button>
+<button onClick={handlestarts10} className="filled">
+  Back
+</button>
+            </div>
+            
+            
+            
+            
           </form>
         </>
       )}

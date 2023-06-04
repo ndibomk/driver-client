@@ -12,8 +12,8 @@ const App = () => {
 
   return (
     <div className="App">
-      <h2>Todo App</h2>
-      <AddTodo todo={todo} setTodo={setTodo} />
+      {/* <h2>Todo App</h2> */}
+      {/* <AddTodo todo={todo} setTodo={setTodo} /> */}
       <ListTodos todo={todo} setTodo={setTodo} />
     </div>
   );

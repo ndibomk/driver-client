@@ -3104,3 +3104,23 @@ gap: 4rem;
   justify-content: center;
   padding-top: 30%;
 }
+.items-rate-v{
+  display: flex;
+  /* width: 100%; */
+  padding-top: 1rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.rate-btn{
+  width: 12rem;
+background-color: #760c46;
+color: white;
+border-radius: 4px;
+border: none;
+}
+.reating-select{
+  width: 12rem;
+  margin-bottom: 1rem;
+  border-radius: 2px;
+}

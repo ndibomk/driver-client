@@ -12,13 +12,14 @@ const ListTodos = () => {
    
   });
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => ({ ...state.auth }));
+
   const todosState = useSelector((state) => state.todosState);
   const { todos } = todosState;
-
+const userId=user?.result?._id
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (todo._id) {
       dispatch(updateReview(todo));
     } 
@@ -36,14 +37,24 @@ const ListTodos = () => {
     // alert('are sure you want to delete this ')
     dispatch(deleteTodo(id));
   };
-
+  function compare(a, b) {
+    if (a._id < b._id) {
+      return 1;
+    }
+    if (a._id > b._id) {
+      return -1;
+    }
+    return 0;
+  }
   const [products, setProduct] = useState([]);
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await axios.get(`https://erytyu.onrender.com/api/review`);
-
-        setProduct(res.data);
+        const res = await axios.get(`https://erytyu.onrender.com/products/userTours/${userId}`);
+        res.data.sort(compare);
+        const result = res.data.filter((_, index) => index < 1);
+        setProduct(result);
+        console.log('results',products);
       } catch (error) {
         console.log(error);
       }
@@ -53,7 +64,7 @@ const ListTodos = () => {
 
   return (
     <div>
-      <h2> You have {products && products.length} tasks </h2>
+      {/* <h2> You have {products && products.length} reviews </h2> */}
       {/* {todosState.getTodosStatus === "pending" ? "loading" : null} */}
       {products.map((todo) => (
         <div
@@ -64,8 +75,9 @@ const ListTodos = () => {
           }}
           key={todo._id}
         >
-          <h3>{todo.task == "" && <> No reviews </>}</h3>
-
+          {/* <h3>{todo.task == "" && <> No reviews </>}</h3> */}
+{/* <h4>{todo.name}</h4> */}
+{/* <h4>{todo.task}</h4> */}
           <h3>
             {todo.task == 1 && (
               <>
@@ -108,8 +120,9 @@ const ListTodos = () => {
    )}
  </h3>
 
- <form onSubmit={handleSubmit}>
+ <form onSubmit={handleSubmit} className="items-rate-v">
  <select 
+ className="reating-select"
        
        onChange={(e) => setTodo({ ...todo, task: e.target.value })}>
         <option value="rating">Rate here</option>
@@ -127,18 +140,18 @@ const ListTodos = () => {
         /> */}
         <br />
         <button
-          type="submit"
+          className="rate-btn"
           // onClick={() => setTodo({ ...todo })}
 
           variant="contained"
           size="small"
           sx={{
-            margin: "0.9rem 0rem",
+           
             fontFamily: "'Abel', 'sansSerif'",
           }}
         >
           
-            Send
+            Rate the process
           
         </button>
       </form>
