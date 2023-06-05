@@ -51,7 +51,7 @@ res.data.sort(compare)
       {user.map((i) => {
         return (
           <>
-            <h2 style={{ textAlign: "center" }}> Recent Order Feedbacks</h2>
+            <h2 style={{ textAlign: "center" }}> Recent  Feedbacks</h2>
 
             <div className="feedback">
               <div className="feedback-items">
