@@ -26,14 +26,42 @@ overflow-x: hidden;
 }
 
 .popup{
-  height: 5rem ;
-  width: 5rem;
-  background-color: white;
-  display: flex;
-  flex-direction:column ;
-  margin:0 !important;
-  padding: 0 !important;
+  /* height: 5rem ; */
+  /* width: 5rem; */
+  /* background-color: white; */
+  /* display: flex; */
+  /* flex-direction:column ; */
+  /* margin:0 !important; */
+  /* padding: 0 !important; */
 
+}
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+.language-buttons button {
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
 }
 
 .MultiStepForm {
@@ -2770,7 +2798,7 @@ color: #000;
 }
 .pending-items{
   display: grid;
-  grid-template-columns: 2fr 2.8fr 1fr 1fr 1fr ;
+  grid-template-columns: 2fr 2.8fr 1fr 1fr 1fr 1fr ;
   width: 100%;
   /* align-content: center;
   justify-content: space-evenly; */

@@ -292,7 +292,7 @@ const CustomerOrders = () => {
 
     if (cameraAllowed === true) {
       console.log("updated data", form);
-      dispatch(createProject({ ...form, toast }));
+      // dispatch(createProject({ ...form, toast }));
       setpics(false);
       sethomebase(true);
     } else {
@@ -557,7 +557,8 @@ const CustomerOrders = () => {
         <>
           {" "}
           <form
-            style={{ height: "24rem" }}
+            style={{ height: "29rem"
+           }}
             onSubmit={handlepics}
             className="pics"
             id="forms"
@@ -568,7 +569,8 @@ const CustomerOrders = () => {
               Please take a picture of the order.Be sure to get all of it in the
               frame!
             </p>
-            <div>
+            <div    style={{ position:'relative',
+ width:'100%',overflow:'hidden',aspectRatio:'16/9' }}>
               {picture == "" ? (
                 <Webcam
                   audio={false}
@@ -579,7 +581,14 @@ const CustomerOrders = () => {
                   videoConstraints={videoConstraints}
                 />
               ) : (
-                <img src={picture} />
+                <img style={{
+                  position: 'absolute',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+                }} src={picture} />
               )}
             </div>
             <div>

@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+// import { HashLink as Link } from 'react-router-hash-link'
+import { useForm,ValidationError } from '@formspree/react'
 import {
   deleteTodo,
   getTodos1,
@@ -103,10 +105,11 @@ const ListTodos = () => {
               >
                 <h6 style={{}}>Deactivate user</h6>
               </button>
-              <button className="btn-admin">
-                {" "}
-                <h6>Send notification</h6>{" "}
-              </button>{" "}
+              
+              
+              
+              
+              
               {/* <button  onClick={() => setTodos({ ...todoss })} className="btn-admin" ><h6>Reject User</h6> </button>{" "} */}
               <button
                 className="btn-admin"
@@ -116,6 +119,14 @@ const ListTodos = () => {
                 <h6 style={{}}>Remove a user</h6>
               </button>
             </form>
+            <Link to={`nots/${todo._id}`}>
+
+            
+            <button className="btn-admin">
+  {" "}
+  <h6>Send notification</h6>{" "}
+</button>{" "}
+</Link>
 
             {/* <form onSubmit={handleSubmits} action="">
               <button
