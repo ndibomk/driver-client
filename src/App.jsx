@@ -35,6 +35,7 @@ import Control from './pages/review/Control';
 import Invoice from './pages/users/Invoice';
 import ActiveOrders from './pages/Orders/ActiveOrders';
 import Error from './pages/Error';
+import ForgotPassword from './pages/authentication/ForgotPassword';
 function App() {
   
   const dispatch = useDispatch();
@@ -85,6 +86,7 @@ function App() {
      <Route path='/' element={<Home/>}/>
      <Route path='/review/:id' element={<Control/>}/>
      <Route path='/active-orders' element={<ActiveOrders/>}/>
+     <Route path='/forget' element={<ForgotPassword/>}/>
      <Route path='*' element={<Error/>}/>
 
      <Route path='/admin' element={

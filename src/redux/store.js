@@ -3,6 +3,8 @@ import AuthReducer from "./features/authSlice";
 import todosReducer from "./features/todosSlice";
 import commentReducer from "./features/commentSlice";
 import invoiceReducer from './features/invoiceSlice'
+import quizReducer from './features/quizSlice'
+import feedbackReducer from './features/feedback'
 // import ProductReducer from "./features/productSlice";
 // import cartReducer from "./features/cartSlice";
 // import messageReducer from "./features/Message";
@@ -14,6 +16,8 @@ const store=configureStore({
         todosState: todosReducer,
         todos: commentReducer,
         invoice: invoiceReducer,
+        todos: quizReducer,
+        todos: feedbackReducer,
         // project: ProductReducer,
         // cart:cartReducer,
         // message:messageReducer,

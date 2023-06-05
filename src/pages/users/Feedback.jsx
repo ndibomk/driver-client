@@ -5,13 +5,23 @@ import { AiFillStar } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 
 const Feedback = () => {
+  function compare(a, b) {
+    if (a._id < b._id) {
+      return 1;
+    }
+    if (a._id > b._id) {
+      return -1;
+    }
+    return 0;
+  }
+
   const [products, setProduct] = useState([]);
   const { id } = useParams();
   useEffect(() => {
     async function fetchData() {
       try {
         const res = await axios.get(`https://erytyu.onrender.com/users/${id}`);
-
+res.data.sort(compare)
         setProduct(res.data);
       } catch (error) {
         console.log(error);

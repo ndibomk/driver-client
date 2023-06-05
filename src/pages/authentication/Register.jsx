@@ -14,36 +14,36 @@ function MultiStepForm() {
   console.log("status", loading);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [inputValue, setInputValue] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [inputValue, setInputValue] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
-    setErrorMessage('');
+    setErrorMessage("");
   };
 
-  const numberRange = Array.from({ length: 78299 - 78201 + 1 }, (_, index) => index + 78201)
-  .filter((number) => number !== 78234 && number !== 78236);
+  const numberRange = Array.from(
+    { length: 78299 - 78201 + 1 },
+    (_, index) => index + 78201
+  ).filter((number) => number !== 78234 && number !== 78236);
 
-  console.log('range',numberRange);
+  console.log("range", numberRange);
 
   const handleNext = (e) => {
     e.preventDefault();
 
-    if (inputValue === '') {
-      setErrorMessage('Please enter a number.');
+    if (inputValue === "") {
+      setErrorMessage("Please enter a number.");
     } else {
       const number = parseInt(inputValue, 10);
       if (numberRange.includes(number)) {
         // Number is within the range, do something
         setStep(step + 1);
-        toast.success('Zip code is within the range')
-
+        toast.success("Zip code is within the range");
       } else {
-        toast.error('Invalid number. Please enter a number within the range.');
+        toast.error("Invalid number. Please enter a number within the range.");
       }
     }
-
   };
   const handlePrev = (e) => {
     e.preventDefault();
@@ -53,17 +53,17 @@ function MultiStepForm() {
     e.preventDefault();
     setStep(step + 4);
   };
-const EmailNext=()=>{
-setStep(step+1)
-}
+  const EmailNext = () => {
+    setStep(step + 1);
+  };
   const [email, setEmail] = useState("");
   const [tell, setTell] = useState("");
   const initialValues = {
     firstname: "",
     lastname: "",
     password: "",
-    confirmPassword:'',
-    task:''
+    confirmPassword: "",
+    task: "",
   };
 
   console.log(tell);
@@ -107,26 +107,18 @@ setStep(step+1)
         className="Card"
         style={{
           height: step === 1 || step === 4 || step == 5 ? "490px" : "380px",
-          
         }}
-
       >
         {step === 1 && (
           <div className="register">
             <h3 style={{ marginTop: "4.8rem" }}>
               Sign up to be a driver
-      
-      
-      
-      
-    
-
               {/* {user.loading===true ? 'hello':'hii'} */}
             </h3>
             <form onSubmit={handleNext} className="form">
               <div className="input">
                 <span>
-                  <MdLocationOn style={{ marginBottom:'.6rem' }} />
+                  <MdLocationOn style={{ marginBottom: ".6rem" }} />
                 </span>
                 <input
                   type="number"
@@ -137,9 +129,7 @@ setStep(step+1)
                 />
               </div>
 
-              <button  className="reg-btn">
-                Start earning Today
-              </button>
+              <button className="reg-btn">Start earning Today</button>
               <button onClick={handleLogin} className="reg-btns">
                 Existing user? login
               </button>
@@ -153,7 +143,7 @@ setStep(step+1)
 
               <div style={{ marginBottom: "2rem" }} className="input">
                 <span>
-                  <MdEmail style={{ marginBottom:'.6rem' }} />
+                  <MdEmail style={{ marginBottom: ".6rem" }} />
                 </span>
                 <input
                   onChange={(e) => setEmail(e.target.value)}
@@ -174,7 +164,7 @@ setStep(step+1)
                 </div>
 
                 <button
-                type="submit"
+                  type="submit"
                   style={{ marginBottom: "" }}
                   // onClick={EmailNext}
                   className="regbtnnext"
@@ -195,7 +185,7 @@ setStep(step+1)
 
               <div style={{ marginBottom: "2rem" }} className="input">
                 <span>
-                  <FaPhoneAlt style={{ marginBottom:'.6rem' }} />
+                  <FaPhoneAlt style={{ marginBottom: ".6rem" }} />
                 </span>
                 <input
                   onChange={(e) => setTell(e.target.value)}
@@ -215,94 +205,98 @@ setStep(step+1)
                   />
                 </div>
 
-                <button  className="regbtnnext">
-                  Next
-                </button>
+                <button className="regbtnnext">Next</button>
               </div>
             </form>
           </div>
         )}
         {step === 4 && (
           <>
-          {loading ? (
-      <div className="spinner">Loading...</div>
+            {loading ? (
+              <div className="spinner">Loading...</div>
+            ) : (
+              <div className="register">
+                <h3 style={{ marginTop: "3rem" }}>
+                  Sign up to become a driver{" "}
+                </h3>
+                <form onSubmit={handleSubmit} className="form">
+                  <div style={{ marginTop: "0rem" }} className="input">
+                    <input
+                      type="text"
+                      required
+                      onChange={(e) =>
+                        setForm({ ...form, firstname: e.target.value })
+                      }
+                      placeholder=" First Name"
+                    />
+                  </div>
+                  <div className="input">
+                    <input
+                      required
+                      type="text"
+                      onChange={(e) =>
+                        setForm({ ...form, lastname: e.target.value })
+                      }
+                      placeholder=" Last Name"
+                    />
+                  </div>
+                  <div className="input">
+                    <span>
+                      <SlKey style={{ background: "" }} />
+                    </span>
+                    <input
+                      onChange={(e) =>
+                        setForm({ ...form, task: e.target.value })
+                      }
+                      type="password"
+                      placeholder=" &nbsp; Password"
+                    />
+                  </div>
 
-          ):
-          <div className="register">
-            <h3 style={{ marginTop: "3rem" }}>Sign up to become a driver </h3>
-            <form onSubmit={handleSubmit} className="form">
-              <div style={{ marginTop: "0rem" }} className="input">
-                <input
-                  type="text"
-                  required
-                  onChange={(e) =>
-                    setForm({ ...form, firstname: e.target.value })
-                  }
-                  placeholder=" First Name"
-                />
-              </div>
-              <div className="input">
-                <input
-                required
-                  type="text"
-                  onChange={(e) =>
-                    setForm({ ...form, lastname: e.target.value })
-                  }
-                  placeholder=" Last Name"
-                />
-              </div>
-              <div className="input">
-                <span>
-                  <SlKey style={{ background: "" }} />
-                </span>
-                <input
-                  onChange={(e) =>
-                    setForm({ ...form, task: e.target.value })
-                  }
-                  type="password"
-                  placeholder=" &nbsp; Password"
-                />
-              </div>
-             
-              <div className="input">
-                <span>
-                  <SlKey style={{ background: "" }} />
-                </span>
-                <input required type="password" placeholder=" &nbsp; Confirm Password"
-                onChange={(e) =>
-                  setForm({ ...form, confirmPassword: e.target.value })
-                }
-                />
-              </div>
-              <div className="next-reg">
-                <div className="icon">
-                  <AiOutlineArrowLeft
-                    fontWeight={600}
-                    style={{ cursor: "pointer", fontWeight: "800" }}
-                    size={30}
-                    onClick={handlePrev}
-                    color="#700841"
-                  />
-                </div>
+                  <div className="input">
+                    <span>
+                      <SlKey style={{ background: "" }} />
+                    </span>
+                    <input
+                      required
+                      type="password"
+                      placeholder=" &nbsp; Confirm Password"
+                      onChange={(e) =>
+                        setForm({ ...form, confirmPassword: e.target.value })
+                      }
+                    />
+                  </div>
+                  <div className="next-reg">
+                    <div className="icon">
+                      <AiOutlineArrowLeft
+                        fontWeight={600}
+                        style={{ cursor: "pointer", fontWeight: "800" }}
+                        size={30}
+                        onClick={handlePrev}
+                        color="#700841"
+                      />
+                    </div>
 
-                <button className="regbtnnext">SignUp</button>
+                    <button className="regbtnnext">SignUp</button>
+                  </div>
+                </form>
               </div>
-            </form>
-          </div>
-        }
+            )}
           </>
         )}
         {step === 5 && (
           <>
             {loading ? (
-      <div className="spinner">Loading...</div>
-      ) : (
+              <div className="spinner">Loading...</div>
+            ) : (
               <div className="register">
                 <h3 style={{ marginTop: "3rem" }}>Driver Login</h3>
                 <form onSubmit={handleSubmit1} className="form">
                   <div className="input">
                     <span>
-                      <MdEmail style={{ background: "", marginBottom:'.6rem' }} />
+                      <MdEmail
+                        style={{ background: "", marginBottom: ".6rem" }}
+                      />
                     </span>
                     <input
                       type="email"
@@ -314,7 +308,7 @@ setStep(step+1)
                   </div>
                   <div className="input">
                     <span>
-                      <SlKey style={{ marginBottom:'.6rem' }} />
+                      <SlKey style={{ marginBottom: ".6rem" }} />
                     </span>
                     <input
                       type="password"
@@ -325,8 +319,7 @@ setStep(step+1)
                     />
                   </div>
                   {loading ? (
-                          <div className="spinner">Loading...</div>
-
+                    <div className="spinner">Loading...</div>
                   ) : (
                     <button className="reg-btn">
                       {/* {" "} */}
@@ -340,6 +333,14 @@ setStep(step+1)
                   >
                     New user? Sign up
                   </button>
+                  {/* <Link to="/forget"> */}
+                    {/* <button */}
+                      {/* // className="reg-btns" */}
+                      {/* // onClick={(e) => setStep(step - 4)} */}
+                    {/* // > */}
+                      {/* New user? Sign up */}
+                    {/* </button> */}
+                  {/* </Link> */}
                 </form>
               </div>
             )}

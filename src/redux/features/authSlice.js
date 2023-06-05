@@ -19,7 +19,19 @@ export const login = createAsyncThunk(
     }
   }
 );
-
+export const forgetPassword = createAsyncThunk(
+  "auth/forgetPassword",
+  async ({ formValue, navigate, toast }, { rejectWithValue }) => {
+    try {
+      const response = await  axios.post(`${url}/forgotpassword`,formValue);
+      toast.success("send Successfully");
+      navigate('/')
+      return response.data;
+    } catch (err) {
+      return rejectWithValue('check your email');
+    }
+  }
+);
 export const register = createAsyncThunk(
   "auth/register",
   async ({ form, navigate, toast }, { rejectWithValue }) => {
@@ -120,6 +132,18 @@ const authSlice = createSlice({
       state.user = action.payload;
     },
     [register.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.message;
+    },
+    [forgetPassword.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [forgetPassword.fulfilled]: (state, action) => {
+      state.loading = false;
+      localStorage.setItem("profile", JSON.stringify({ ...action.payload }));
+      state.user = action.payload;
+    },
+    [forgetPassword.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload.message;
     },

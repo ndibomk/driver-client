@@ -1,7 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import moment from "moment";
-import { deleteTodo, getTodos, todosAdd, updateReview } from "../../redux/features/todo";
+import {
+  deleteTodo,
+  getTodos,
+  todosAdd,
+  updateReview,
+} from "../../redux/features/todo";
 import axios from "axios";
 import { AiFillStar } from "react-icons/ai";
 
@@ -9,20 +14,19 @@ const ListTodos = () => {
   const [todo, setTodo] = useState({
     task: "",
     isComplete: false,
-   
   });
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state.auth }));
 
   const todosState = useSelector((state) => state.todosState);
   const { todos } = todosState;
-const userId=user?.result?._id
+  const userId = user?.result?._id;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (todo._id) {
       dispatch(updateReview(todo));
-    } 
+    }
 
     // setTodo({
     //   task: "",
@@ -50,11 +54,13 @@ const userId=user?.result?._id
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await axios.get(`https://erytyu.onrender.com/products/userTours/${userId}`);
+        const res = await axios.get(
+          `https://erytyu.onrender.com/products/userTours/${userId}`
+        );
         res.data.sort(compare);
         const result = res.data.filter((_, index) => index < 1);
         setProduct(result);
-        console.log('results',products);
+        console.log("results", products);
       } catch (error) {
         console.log(error);
       }
@@ -76,85 +82,51 @@ const userId=user?.result?._id
           key={todo._id}
         >
           {/* <h3>{todo.task == "" && <> No reviews </>}</h3> */}
-{/* <h4>{todo.name}</h4> */}
-{/* <h4>{todo.task}</h4> */}
-          <h3>
-            {todo.task == 1 && (
-              <>
-                {" "}
-                <AiFillStar />{" "}
-              </>
-            )}
-          </h3>
+          {/* <h4>{todo.name}</h4> */}
+          {/* <h4>{todo.task}</h4> */}
 
-          <h3>
-            {todo.task == 2 && (
-              <>
-                {" "}
-                <AiFillStar /> <AiFillStar />{" "}
-              </>
-            )}
-          </h3>
-          <h3>
-   {todo.task == 3 && (
-     <>
-       {" "}
-       <AiFillStar /> <AiFillStar /> <AiFillStar />{" "}
-     </>
-   )}
- </h3>
- <h3>
-   {todo.task == 4 && (
-     <>
-       {" "}
-       <AiFillStar /> <AiFillStar /> <AiFillStar /> <AiFillStar />{" "}
-     </>
-   )}
- </h3>
- <h3>
-   {todo.task == 5 && (
-     <>
-       {" "}
-       <AiFillStar /> <AiFillStar /> <AiFillStar /> <AiFillStar /> <AiFillStar />{" "}
-     </>
-   )}
- </h3>
-
- <form onSubmit={handleSubmit} className="items-rate-v">
- <select 
- className="reating-select"
-       
-       onChange={(e) => setTodo({ ...todo, task: e.target.value })}>
-        <option value="rating">Rate here</option>
-<option type='number' value='1'>1-Owawful </option>
-<option type='number' value='2'>2-bad </option>
-<option type='number' value='3'>3-Average</option>
-<option type='number' value='4'>4-Good </option>
-<option type='number' value='5'>5-Excellent </option>
-       </select>
-        {/* <input
+          <form onSubmit={handleSubmit} className="items-rate-v">
+            <select
+              className="reating-select"
+              onChange={(e) => setTodo({ ...todo, task: e.target.value })}
+            >
+              <option value="rating">Rate here</option>
+              <option type="number" value="1">
+                1-Owawful{" "}
+              </option>
+              <option type="number" value="2">
+                2-bad{" "}
+              </option>
+              <option type="number" value="3">
+                3-Average
+              </option>
+              <option type="number" value="4">
+                4-Good{" "}
+              </option>
+              <option type="number" value="5">
+                5-Excellent{" "}
+              </option>
+            </select>
+            {/* <input
           type="number"
           placeholder="Enter a task"
           // value={todo.task}
           onChange={(e) => setTodo({ ...todo, task: e.target.value })}
         /> */}
-        <br />
-        <button
-          className="rate-btn"
-          // onClick={() => setTodo({ ...todo })}
+            <br />
+            <button
+              className="rate-btn"
+              // onClick={() => setTodo({ ...todo })}
 
-          variant="contained"
-          size="small"
-          sx={{
-           
-            fontFamily: "'Abel', 'sansSerif'",
-          }}
-        >
-          
-            Rate the process
-          
-        </button>
-      </form>
+              variant="contained"
+              size="small"
+              sx={{
+                fontFamily: "'Abel', 'sansSerif'",
+              }}
+            >
+              Rate the process
+            </button>
+          </form>
           {/* <button
             variant="outlined"
             size="small"

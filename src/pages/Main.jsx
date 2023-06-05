@@ -12,9 +12,10 @@ import axios from "axios";
 import runOneSignal from './test/OneSignal';
 import MyComponent from "../Modal";
 import Review from "./test/Review";
-import App from "./review/RevMain";
+// import App from "./review/RevMain";
 import Appp from "./review/MainCom";
 import Not from "../Not";
+import App from "./quiz/App";
 const Main = () => {
   const { user } = useSelector((state) => ({ ...state.auth }));
   console.log(user);
@@ -61,6 +62,7 @@ const Main = () => {
             {/* <Not/> */}
             <div className="main-dash">
               <div className="main-top" >
+                {/* <App/> */}
                 {/* <App/> */}
                 <h3 style={{marginBottom:'2rem',marginLeft:'.3rem', marginTop:''}}>
                   Welcome{" "}

@@ -8,7 +8,7 @@ import {
 } from "../../redux/features/todosSlice";
 import moment from "moment";
 import { Table } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ListTodos = () => {
   const [todo, setTodo] = useState({
@@ -74,13 +74,22 @@ const ListTodos = () => {
         {todosState.getTodosStatus === "pending" ? "loading" : null}
         {todos.map((todo) => (
           <div className="pending-items" key={todo._id}>
-            <h6>{todo.name}</h6>
+                      <Link style={{textDecoration:'none'}} to={`/user/${todo._id}`} >
+
+          <h6>{todo.name}</h6>
+          </Link> 
+          <Link style={{textDecoration:'none'}} to={`/user/${todo._id}`} >
+
             <h6>
               {todo.email} {todo.tell}{" "}
             </h6>
+            </Link>
             <h6>{todo.isComplete === true ? "Active" : "Pending"}</h6>
+            
+
             <form onSubmit={handleSubmit1} className="pending-btns">
               {todosState.getTodosStatus === "pending" ? "loading" : null}
+              
             </form>
             <form
               style={{ marginRight: ".6rem" }}

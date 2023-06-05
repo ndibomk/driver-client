@@ -13,7 +13,8 @@ import Cards from "./authentication/RegNext";
 // import App from "./authentication/Register";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import App from "./review/RevMain";
+import App from "./quiz/App";
+// import App from "./review/RevMain";
 // import App from "./test/App";
 function Home() {
   const [authenticated, setauthenticated] = useState(null);
@@ -35,8 +36,10 @@ function Home() {
     return (
       <div style={{width:'100%'}}>
         {/* <Test/> */}
-        <App/>
+        {/* <App/> */}
+        
         <Hero />
+        {/* <App/> */}
         <Requirement />
         <About />
         <Questions />

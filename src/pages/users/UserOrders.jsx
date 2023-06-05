@@ -7,6 +7,15 @@ import { invoiceAdd } from "../../redux/features/invoiceSlice";
 import {toast} from 'react-toastify'
 import { useDispatch } from "react-redux";
 const UserOrders = () => {
+  function compare(a, b) {
+    if (a._id < b._id) {
+      return 1;
+    }
+    if (a._id > b._id) {
+      return -1;
+    }
+    return 0;
+  }
   const dispatch =useDispatch()
   const { id } = useParams();
   const [user, setUsers] = useState([]);
@@ -16,7 +25,7 @@ const UserOrders = () => {
         const res = await axios.get(
           `https://erytyu.onrender.com/products/userTours/${id}`
         );
-
+res.data.sort(compare)
         setUsers(res.data);
       } catch (error) {
         console.log(error);
@@ -31,7 +40,7 @@ const UserOrders = () => {
     async function fetchData() {
       try {
         const res = await axios.get(`https://erytyu.onrender.com/users/${id}`);
-
+        res.data.sort(compare)
         setProduct(res.data);
       } catch (error) {
         console.log(error);
