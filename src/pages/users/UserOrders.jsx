@@ -81,8 +81,8 @@ const handleSubmit=(e)=>{
               <div className="main-user-orders">
                 <div className="user-orders">
                   <div className="user-details">
-                    <h5>Driver Name {products.name}</h5>
-                    <h5> Driver Phone{products.tell}</h5>
+                    <h5>Driver Naame {user.driverName}</h5>
+                    <h5> Driver Phone {user.driverTell}</h5>
                   </div>
                   {/* <Reviews gigId={products._id}/> */}
                   {/* <ReviewForm productId={products._id}/> */}
@@ -108,7 +108,7 @@ const handleSubmit=(e)=>{
                     </Link>
 
                     {/* </form> */}
-                    <Link to={`/feedback/${products._id}`}>
+                    <Link to={`/feedback/${user._id}`}>
                       <button className="">Feedback</button>
                     </Link>
                   </div>

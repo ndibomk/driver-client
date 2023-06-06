@@ -34,7 +34,7 @@ res.data.sort(compare)
     async function fetchData() {
       try {
         const res = await axios.get(
-          `https://erytyu.onrender.com/products/userTours/${id}`
+          `https://erytyu.onrender.com/products/${id}`
         );
 
         setUsers(res.data);
@@ -48,8 +48,8 @@ res.data.sort(compare)
 
   return (
     <div style={{ background: "whitesmoke" }}>
-      {user.map((i) => {
-        return (
+      {/* {user.map((i) => { */}
+       
           <>
             <h2 style={{ textAlign: "center" }}> Recent  Feedbacks</h2>
 
@@ -60,10 +60,10 @@ res.data.sort(compare)
                 </h4>
 
                 <h6>Delivery rating </h6>
-                <h3>{i.task == "" && <> No reviews </>}</h3>
+                <h3>{user.task == "" && <> No reviews </>}</h3>
 
                 <h3>
-                  {i.task == 1 && (
+                  {user.task == 1 && (
                     <>
                       {" "}
                       <AiFillStar />{" "}
@@ -72,7 +72,7 @@ res.data.sort(compare)
                 </h3>
 
                 <h3>
-                  {i.task == 2 && (
+                  {user.task == 2 && (
                     <>
                       {" "}
                       <AiFillStar /> <AiFillStar />{" "}
@@ -80,7 +80,7 @@ res.data.sort(compare)
                   )}
                 </h3>
                 <h3>
-                  {i.task == 3 && (
+                  {user.task == 3 && (
                     <>
                       {" "}
                       <AiFillStar /> <AiFillStar /> <AiFillStar />{" "}
@@ -88,7 +88,7 @@ res.data.sort(compare)
                   )}
                 </h3>
                 <h3>
-                  {i.task == 4 && (
+                  {user.task == 4 && (
                     <>
                       {" "}
                       <AiFillStar /> <AiFillStar /> <AiFillStar />{" "}
@@ -97,7 +97,7 @@ res.data.sort(compare)
                   )}
                 </h3>
                 <h3>
-                  {i.task == 5 && (
+                  {user.task == 5 && (
                     <>
                       {" "}
                       <AiFillStar /> <AiFillStar /> <AiFillStar />{" "}
@@ -112,7 +112,7 @@ res.data.sort(compare)
             </div>
           </>
         );
-      })}
+      {/* })} */}
     </div>
   );
 };

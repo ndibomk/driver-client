@@ -37,7 +37,7 @@ const SingleUser = () => {
         <div className='item-user'>  <p>Zip code  :</p> <p>{products.tell}</p> </div>
        
         <div className="password-rest">
-    <button style={{width:'12rem'}} className="btn">Reset password </button>
+    {/* <button style={{width:'12rem'}} className="btn">Reset password </button> */}
     <Link to={`/orders/${products._id}`}>
     <button style={{width:'12rem'}} className="btn">
        Orders 

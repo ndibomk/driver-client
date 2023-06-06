@@ -63,9 +63,9 @@ const Main = () => {
                 {/* <App/> */}
                 {/* <App/> */}
                 <h3 style={{marginBottom:'2rem',marginLeft:'.3rem', marginTop:''}}>
-                  Welcome  <> {user?.result?.name}</>
-                  {user?.result?.status === false &&
-                    user?.result?.isComplete === true && (
+                  Welcome 
+                  {/* {user?.result?.status === false && */}
+                   { user?.result?.isComplete === true && (
                       <> {user?.result?.name}</>
                     )}{" "}
                 </h3>
@@ -223,8 +223,8 @@ const Main = () => {
               </div>
 
               <div className="main-bottom">
-                {user?.result?.status === false &&
-                  user?.result?.isComplete === true && (
+                {/* {user?.result?.status === false && */}
+                  {user?.result?.isComplete === true && (
                     <Link to="/orders">
                       <button className="order-button">
                         <h1 style={{ marginTop: "", textAlign: "center" }}>

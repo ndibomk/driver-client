@@ -88,7 +88,7 @@ window.alert('are sure  you want to activate this user')
       <h5>Status</h5>
     </div>
     <div className="pending-line"></div>
-
+    {todosState.getTodosStatus === "pending" ? "loading" : null}
     {/* <h2> You have {todos && todos.length} tasks </h2> */}
     {users.map((todo) => (
       <div className="pending-ite" key={todo._id}>
