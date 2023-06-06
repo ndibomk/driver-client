@@ -31,7 +31,7 @@ const ListTodos = () => {
   };
   const handleSubmit = (e) => {
     // e.preventDefault();
-    window.alert("are sure  you want to reject  this user");
+    window.alert("are sure  you want to temporarily deactivate  this user");
 
     if (todo._id) {
       dispatch(updateTodo(todo));
@@ -49,6 +49,7 @@ const ListTodos = () => {
 
   const handleDelete1 = (id) => {
     dispatch(deleteTodo(id));
+    navigate('/admin')
   };
   const handleSubmit1 = (e) => {
     // e.preventDefault();

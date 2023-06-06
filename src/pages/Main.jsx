@@ -53,9 +53,9 @@ const Main = () => {
   return (
     <>
       {user?.result?.role === "admin" ? (
-        <>
-          <AdminDashBoard />
-        </>
+       <AdminDashBoard />
+
+        
       ) : (
         <>
           <div className="Main">

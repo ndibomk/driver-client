@@ -59,6 +59,8 @@ export const deleteTodo = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const response = await axios.delete(baseURL + "todos/" + id);
+      toast.error("user permanently removed from the system");
+
       return response.data;
     } catch (error) {
       console.log(error);
@@ -81,7 +83,7 @@ export const updateTodo = createAsyncThunk(
         date,
         uid,
       });
-      toast.error("user deactivated Successfully");
+      toast.error("user temporalily deactivated Successfully");
 
       return response.data;
     } catch (error) {

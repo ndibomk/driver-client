@@ -32,11 +32,11 @@ const ListTodos = () => {
   };
   const handleSubmit = (e) => {
     // e.preventDefault();
-    window.alert('are sure  you want to reject  this user')
+    window.alert('are sure  you want to temporalily deactivate  this user')
 
     if (todo._id) {
       dispatch(updateTodo(todo));
-      navigate('/admin/rejected')
+      navigate('/')
     }
     setTodo({
       isComplete: false,

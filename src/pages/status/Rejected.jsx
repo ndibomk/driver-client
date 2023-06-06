@@ -1,10 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { deleteTodo } from "../../redux/features/todosSlice";
-
+// import { deleteTodo, rejectUser } from "../../redux/features/todosSlice";
+import {
+  deleteTodo,
+  getTodos1,
+  rejectUser,
+  updateTodo,
+} from "../../redux/features/todosSlice";
 const Pedding = () => {
   // const usersData = [
   //   {
@@ -29,7 +34,7 @@ const Pedding = () => {
   const navigate = useNavigate();
 
   const handleDelete = (id) => {
-    alert('are you sure you want to delete this user')
+    alert('are you sure you want to permanently delete this user')
     dispatch(deleteTodo(id));
     navigate("/admin/rejected");
   };
@@ -49,6 +54,28 @@ const Pedding = () => {
   }
   fetchData();
   }, []);
+
+
+  const [todo, setTodo] = useState({
+    status: false,
+    isComplete: false,
+  });
+  
+  const todosState = useSelector((state) => state.todosState);
+  const { todos } = todosState;
+  const handleSubmit1 = (e) => {
+    // e.preventDefault();
+window.alert('are sure  you want to activate this user')
+    if (todo._id) {
+      dispatch(rejectUser(todo));
+      navigate('/')
+    }
+    setTodo({
+      isComplete: false,
+      status:false
+    });
+  };
+
 
   return (
     <div className="pendng">
@@ -81,7 +108,17 @@ const Pedding = () => {
  >
    <h6 style={{}}>Remove a user</h6>
  </button>
-         
+ <form onSubmit={handleSubmit1} className="pending-btns">
+{todosState.getTodosStatus === "pending" ? "loading" : null}
+  <button
+    className="btn-admin"
+    type="submit"
+    onClick={() => setTodo({ ...todo })}
+  >
+    <h6 style={{}}>Activate user</h6>
+  </button>
+  
+</form>
           {/* <button className="btn-admin" > <h6>Send notification</h6> </button>{" "} */}
 
           <div className="line-sep"></div>
