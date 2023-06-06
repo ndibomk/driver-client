@@ -519,7 +519,7 @@ margin-left: 0 !important;
 @media (min-width: 400px) {
   .exp h5{
     position: absolute;
-    top: 46rem !important;
+    top: 4rem !important;
     margin-top: 5rem;
   
   }
@@ -563,7 +563,7 @@ margin-left: 0 !important;
   }
   .exp h2{
     position: absolute;
-    top: 39rem !important;
+    top: 3rem !important;
     margin-top: 1rem;
   }
   .exp h3{
@@ -594,36 +594,36 @@ margin-left: 0 !important;
 @media (min-width: 1300px) {
   .exp h5{
     position: absolute;
-    top: 31rem !important;
+    top: 26rem !important;
     margin-top: 5rem;
   
   }
   .exp h2{
     position: absolute;
-    top: 29rem !important;
+    top: 24rem !important;
     margin-top: 1rem;
   }
   .exp h3{
     position: absolute;
-    top: 35rem !important;
+    top: 30rem !important;
     margin-top: 1rem;
   }
 }
 @media (max-width: 1000px) {
   .exp h5{
     position: absolute;
-    top: 43rem !important;
+    top: 39rem !important;
     margin-top: 5rem;
   
   }
   .exp h2{
     position: absolute;
-    top: 41rem !important;
+    top: 36rem !important;
     margin-top: 1rem;
   }
   .exp h3{
     position: absolute;
-    top: 47rem !important;
+    top: 43rem !important;
     margin-top: 1rem;
   }
 }
@@ -2931,7 +2931,7 @@ padding-top: 1rem;
 }
 .exp h3{
   position: absolute;
-  top: 34rem ;
+  top: 28rem ;
   margin-top: 1rem;
 }
 
