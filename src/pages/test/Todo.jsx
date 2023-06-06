@@ -36,7 +36,7 @@ const ListTodos = () => {
 
     if (todo._id) {
       dispatch(updateTodo(todo));
-      navigate('/admin/rejected')
+      navigate('/rejected')
     }
     setTodo({
       isComplete: false,

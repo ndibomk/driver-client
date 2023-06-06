@@ -50,14 +50,12 @@ const Main = () => {
     fetchData();
   }, []);
 
-  return (
-    <>
-      {user?.result?.role === "admin" ? (
-       <AdminDashBoard />
-
-        
-      ) : (
-        <>
+  
+    
+      if(user?.result?.role === "admin") {
+        return <AdminDashBoard />
+      }else{
+        return (
           <div className="Main">
             {/* <Not/> */}
             <div className="main-dash">
@@ -238,10 +236,10 @@ const Main = () => {
               </div>
             </div>
           </div>
-        </>
-      )}
-    </>
-  );
+        )
+  
+    
+                  }
 };
 
 export default Main;
