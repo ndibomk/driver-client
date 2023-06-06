@@ -10,7 +10,7 @@ const Invoice = () => {
   const { user } = useSelector((state) => ({ ...state.auth }));
   const userId = user?.result?._id;
   const dispatch = useDispatch();
-
+const [show,setShow]=useState(true)
   // const [products, setProduct] = useState([]);
   // const { id } = useParams();
   // useEffect(() => {
@@ -94,6 +94,7 @@ useEffect(()=>{
       //   cut:cut.length
     }));
     toast.success(`invoces send successfuly for ${ users.name}`)
+    setShow(false)
   };
 
   // useEffect(() => {
@@ -121,6 +122,7 @@ useEffect(()=>{
 return(
   <>
   {user._id===users.creator ?(
+    // {show && <>'hii'</>}
     <div className="invoice-data-items">
             <h2 style={{textAlign:'center'}}>Invoice</h2>
 
