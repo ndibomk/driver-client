@@ -122,8 +122,10 @@ useEffect(()=>{
 return(
   <>
   {user._id===users.creator ?(
-    // {show && <>'hii'</>}
+   
     <div className="invoice-data-items">
+       {show ? (
+        <>
             <h2 style={{textAlign:'center'}}>Invoice</h2>
 
     <p>Driver Name :  { user.name}</p>
@@ -137,7 +139,10 @@ return(
         <button onClick={set} className="btn-invoice">Send invoice</button>
         {/* </Link> */}
       </form>
+      </>
+      ):''}
     </div>
+  
   ):''}
   </>
 )

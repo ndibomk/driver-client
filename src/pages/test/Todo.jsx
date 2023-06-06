@@ -15,10 +15,7 @@ const ListTodos = () => {
     status: false,
     isComplete: false,
   });
-  
-  
-  
-  
+
   const dispatch = useDispatch();
   const todosState = useSelector((state) => state.todosState);
   const { todos } = todosState;
@@ -32,18 +29,18 @@ const ListTodos = () => {
   };
   const handleSubmit = (e) => {
     // e.preventDefault();
-    window.alert('are sure  you want to temporalily deactivate  this user')
-
+    window.alert("are sure  you want to temporarily deactivate  this user");
     if (todo._id) {
       dispatch(updateTodo(todo));
-      navigate('/admin/rejected')
+      navigate("/admin/rejected");
     }
     setTodo({
       isComplete: false,
-      status:false
+      status: false,
     });
   };
-const navigate=useNavigate()
+
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getTodos());
   }, [dispatch]);
@@ -53,17 +50,16 @@ const navigate=useNavigate()
   };
   const handleSubmit1 = (e) => {
     // e.preventDefault();
-window.alert('are sure  you want to activate this user')
+    window.alert("are sure  you want to activate this user");
     if (todo._id) {
       dispatch(rejectUser(todo));
-      navigate('/')
+      navigate("/");
     }
     setTodo({
       isComplete: false,
-      status:false
+      status: false,
     });
   };
-
 
   return (
     <>
@@ -84,7 +80,7 @@ window.alert('are sure  you want to activate this user')
             </h6>
             <h6>{todo.isComplete === true ? "Active" : "Pending"}</h6>
             <form onSubmit={handleSubmit1} className="pending-btns">
-            {todosState.getTodosStatus === "pending" ? "loading" : null}
+              {todosState.getTodosStatus === "pending" ? "loading" : null}
 
               <button
                 className="btn-admin"
@@ -93,24 +89,26 @@ window.alert('are sure  you want to activate this user')
               >
                 <h6 style={{}}>Activate user</h6>
               </button>
-              
             </form>
-            <form style={{marginRight:'.6rem'}} onSubmit={handleSubmit} className="pending-btns">
-              
+            <form
+              style={{ marginRight: ".6rem" }}
+              onSubmit={handleSubmit}
+              className="pending-btns"
+            >
               <button
                 className="btn-admin"
                 type="submit"
-                onClick={() => setTodo({ ...todo })}              >
+                onClick={() => setTodo({ ...todo })}
+              >
                 <h6 style={{}}>Reject user</h6>
               </button>
-            
-            <button className="btn-admin">
-              {" "}
-              <h6>Send notification</h6>{" "}
-            </button>{" "}
+              <button className="btn-admin">
+                {" "}
+                <h6>Send notification</h6>{" "}
+              </button>{" "}
               {/* <button  onClick={() => setTodos({ ...todoss })} className="btn-admin" ><h6>Reject User</h6> </button>{" "} */}
-            </form> 
-              
+            </form>
+
             {/* <form onSubmit={handleSubmits} action="">
               <button
                 className="btn-admin"
@@ -121,7 +119,6 @@ window.alert('are sure  you want to activate this user')
               </button>
             </form> */}
             <div className="line-sep"></div>
-
           </div>
         ))}
       </div>

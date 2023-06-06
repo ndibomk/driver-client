@@ -63,7 +63,7 @@ const Main = () => {
                 {/* <App/> */}
                 {/* <App/> */}
                 <h3 style={{marginBottom:'2rem',marginLeft:'.3rem', marginTop:''}}>
-                  Welcome{" "}
+                  Welcome  <> {user?.result?.name}</>
                   {user?.result?.status === false &&
                     user?.result?.isComplete === true && (
                       <> {user?.result?.name}</>
