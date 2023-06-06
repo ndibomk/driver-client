@@ -51,12 +51,11 @@ const Main = () => {
     fetchData();
   }, []);
 // useEffect(()=>{
-// if(user?.result?.role === "admin"){
-  // navigate('/admin')
-// }
-// },[])
+if(user?.result?.role === "admin"){
+  navigate('/admin')
+}
   
-      if(user?.result?.role === "admin") {
+      if(user?.result?.role ==="admin") {
         return (
           <div>
             <AdminDashBoard />
