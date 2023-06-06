@@ -2852,7 +2852,7 @@ padding-top: 1rem;
 }
 .pending-ite{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
+  grid-template-columns: 1fr 2fr 1fr 1fr 1fr ;
   color: #000;
   padding-top: 1rem;
 
