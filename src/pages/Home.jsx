@@ -28,9 +28,10 @@ function Home() {
     }
     console.log('auth',loggedInUser);
   }, []);
+
   if (user?.result?.role==='admin') {
     navigate("/admin");
-  }else if(user?.reulst?.role==='driver'){
+  }if(user?.reulst?.role==='driver'){
     navigate("/dashboard");
   } else {
     return (

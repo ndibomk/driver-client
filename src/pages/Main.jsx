@@ -50,11 +50,11 @@ const Main = () => {
     }
     fetchData();
   }, []);
-useEffect(()=>{
-if(user?.result?.role === "admin"){
-  navigate('/admin')
-}
-},[])
+// useEffect(()=>{
+// if(user?.result?.role === "admin"){
+  // navigate('/admin')
+// }
+// },[])
   
       if(user?.result?.role === "admin") {
         return (
