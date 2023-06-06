@@ -51,8 +51,9 @@ const Main = () => {
   }, []);
 
   
-    
       if(user?.result?.role === "admin") {
+        {user?.result?.role === "admin" ? navigate('/admin'):navigate('/') }
+
         return <AdminDashBoard />
       }else{
         return (
