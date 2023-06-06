@@ -7,7 +7,7 @@ import Modal from "react-bootstrap/Modal";
 import Tests from "./Tests";
 import { toast } from "react-toastify";
 // import {image} from '../assets/image.jpg'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import runOneSignal from './test/OneSignal';
 import MyComponent from "../Modal";
@@ -50,16 +50,19 @@ const Main = () => {
     }
     fetchData();
   }, []);
+  const navigate =useNavigate()
 // useEffect(()=>{
 if(user?.result?.role === "admin"){
   navigate('/admin')
 }
+// },[])
   
-      if(user?.result?.role ==="admin") {
-        return 
+      if(user?.result?.role === "admin") {
+        return (
+          <div>
             <AdminDashBoard />
-         
-        
+          </div>
+        )
       }if(user?.result?.role === "driver"){
         return (
           <div className="Main">
