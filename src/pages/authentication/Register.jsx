@@ -99,6 +99,7 @@ function MultiStepForm() {
     e.preventDefault();
     if (task) {
       dispatch(login({ formValue, navigate, toast }));
+      navigate("/dashboard");
     }
   };
   return (
