@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import runOneSignal from './test/OneSignal';
 import MyComponent from "../Modal";
+import Home from './Home'
 import Review from "./test/Review";
 // import App from "./review/RevMain";
 import Appp from "./review/MainCom";
@@ -56,10 +57,12 @@ if(user?.result?.role === "admin"){
 },[])
   
       if(user?.result?.role === "admin") {
-        {user?.result?.role === "admin" ? navigate('/admin'):navigate('/') }
-
-        return <AdminDashBoard />
-      }else{
+        return (
+          <div>
+            <AdminDashBoard />
+          </div>
+        )
+      }if(user?.result?.role === "driver"){
         return (
           <div className="Main">
             {/* <Not/> */}
@@ -244,6 +247,12 @@ if(user?.result?.role === "admin"){
         )
   
     
+                  }else{
+                   return(
+                    <div>
+                      <Home/>
+                    </div>
+                   )
                   }
 };
 
