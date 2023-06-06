@@ -120,7 +120,7 @@ const ListTodos = () => {
                 <h6 style={{}}>Remove a user</h6>
               </button>
             </form>
-            <Link to={`nots/${todo._id}`}>
+            <Link to={`/forget/${todo._id}`}>
 
             
             <button className="btn-admin">

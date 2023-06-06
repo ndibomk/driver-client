@@ -89,7 +89,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/review/:id" element={<Control />} />
           <Route path="/active-orders" element={<ActiveOrders />} />
-          <Route path="/forget" element={<ForgotPassword />} />
+          <Route path="/forget/:id" element={<ForgotPassword />} />
           <Route path="*" element={<Error />} />
 
           <Route

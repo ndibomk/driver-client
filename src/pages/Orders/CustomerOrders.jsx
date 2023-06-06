@@ -292,7 +292,7 @@ const CustomerOrders = () => {
 
     if (cameraAllowed === true) {
       console.log("updated data", form);
-      dispatch(createProject({ ...form, toast }));
+      // dispatch(createProject({ ...form, toast }));
       setpics(false);
       sethomebase(true);
     } else {
@@ -431,9 +431,8 @@ const CustomerOrders = () => {
               <button className="filled" type="submit">
                 I'm Ready!
               </button>
-              <Link to='/dashboard'>
-              <button className="unfilled">Later </button>
-
+              <Link to="/dashboard">
+                <button className="unfilled">Later </button>
               </Link>
             </div>
           </form>
@@ -557,8 +556,7 @@ const CustomerOrders = () => {
         <>
           {" "}
           <form
-            style={{ height: "29rem"
-           }}
+            style={{ height: "29rem" }}
             onSubmit={handlepics}
             className="pics"
             id="forms"
@@ -569,8 +567,14 @@ const CustomerOrders = () => {
               Please take a picture of the order.Be sure to get all of it in the
               frame!
             </p>
-            <div    style={{ position:'relative',
- width:'100%',overflow:'hidden',aspectRatio:'16/9' }}>
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                overflow: "hidden",
+                aspectRatio: "16/9",
+              }}
+            >
               {picture == "" ? (
                 <Webcam
                   audio={false}
@@ -581,14 +585,17 @@ const CustomerOrders = () => {
                   videoConstraints={videoConstraints}
                 />
               ) : (
-                <img style={{
-                  position: 'absolute',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  objectFit: 'cover',
-                }} src={picture} />
+                <img
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                  src={picture}
+                />
               )}
             </div>
             <div>
@@ -701,11 +708,10 @@ const CustomerOrders = () => {
             {invoice.map((item) => {
               return (
                 <>
-                  {user?.result?._id === item.userId ? (
+                  {/* {user?.result?._id === item.userId ? ( */}
                     <>
-                      {currentDate - moment(item.createdAt).format("D") <= 4 ||
-                      currentDate - moment(item.createdAt).format("D") >=
-                        -27 ? (
+                      {/* {currentDate - moment(item.createdAt).format("D") <= 4  */}
+                       {/* ? ( */}
                         <>
                           <>
                             <Button
@@ -721,9 +727,9 @@ const CustomerOrders = () => {
                                 <Modal.Title>Current Invoice</Modal.Title>
                               </Modal.Header>
                               <Modal.Body>
-                                <h6>{item.name}</h6>
-                                <h6>{item.phone}</h6>
-                                <h6>{item.address}</h6>
+                                <h6> Customer name: {item.name}</h6>
+                                <h6> Customer phone : {item.phone}</h6>
+                                <h6>Customer address {item.address}</h6>
                                 <h6> Your Cut :$10</h6>
                               </Modal.Body>
                               <Modal.Footer>
@@ -742,13 +748,13 @@ const CustomerOrders = () => {
                           {/* {moment(item.createdAt).format("D")} */}
                           {/* {currentDate} */}
                         </>
-                      ) : (
-                        ""
-                      )}
+                      {/* ) : ( */}
+                        {/* "" */}
+                      {/* )} */}
                     </>
-                  ) : (
-                    ""
-                  )}
+                  {/* ) : ( */}
+                    {/* "" */}
+                  {/* )} */}
                   <p></p>
                 </>
               );
@@ -864,7 +870,7 @@ const CustomerOrders = () => {
 
       {rating && (
         <>
-          <div action=""  className="rating" id="forms">
+          <div action="" className="rating" id="forms">
             <h1>Want to add onother $ ammount</h1>
             <p>Just take 30 seconds to give us some feedback! </p>
             <h5>How would you rate this delivery?</h5>
@@ -872,8 +878,11 @@ const CustomerOrders = () => {
               <App />
             </div>
 
-           
-            <button onClick={handlerating} style={{ marginTop: "70px" }} className="filled">
+            <button
+              onClick={handlerating}
+              style={{ marginTop: "70px" }}
+              className="filled"
+            >
               {" "}
               No thanks
             </button>
@@ -949,16 +958,12 @@ const CustomerOrders = () => {
               cols="25"
               placeholder="Feedback..."
             ></textarea>
-            <div style={{display:"flex"}}>
-            <button className="filled">Done</button>
-<button onClick={handlestarts10} className="filled">
-  Back
-</button>
+            <div style={{ display: "flex" }}>
+              <button className="filled">Done</button>
+              <button onClick={handlestarts10} className="filled">
+                Back
+              </button>
             </div>
-            
-            
-            
-            
           </form>
         </>
       )}
