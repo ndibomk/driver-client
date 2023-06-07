@@ -100,8 +100,7 @@ function MultiStepForm() {
     if (task) {
       dispatch(login({ formValue, navigate, toast }));
     }
-    // navigate('/main')
-  };
+   };
   return (
     <div className="MultiStepForm">
       <div
@@ -132,7 +131,7 @@ function MultiStepForm() {
 
               <button className="reg-btn">Start earning Today</button>
               <button onClick={handleLogin} className="reg-btns">
-                Existing user? login
+                Existing user ? login
               </button>
             </form>
           </div>
