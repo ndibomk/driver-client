@@ -100,6 +100,7 @@ function MultiStepForm() {
     if (task) {
       dispatch(login({ formValue, navigate, toast }));
     }
+    // navigate('/main')
   };
   return (
     <div className="MultiStepForm">

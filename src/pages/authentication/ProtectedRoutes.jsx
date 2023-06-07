@@ -14,5 +14,5 @@ useEffect(() => {
 if (!authenticated) {
   navigate("/");
 } else {
-  navigate("/dashboard");
+  navigate("/main");
 }

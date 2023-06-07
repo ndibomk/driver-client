@@ -10,7 +10,7 @@ export const login = createAsyncThunk(
     try {
       const response = await  axios.post(`${url}/signin`,formValue);
       toast.success("Login Successfully");
-      navigate("/dashboard");
+      navigate("/main");
       return response.data;
     } catch (err) {
       // return rejectWithValue(err.response.data);

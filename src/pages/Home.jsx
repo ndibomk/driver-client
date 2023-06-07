@@ -28,7 +28,13 @@ function Home() {
     }
     console.log('auth',loggedInUser);
   }, []);
-
+// useEffect(()=>{
+  // if (user?.result?.role==='admin') {
+    // navigate("/admin");
+  // }if(user?.reulst?.role==='driver'){
+    // navigate("/dashboard");
+  // } 
+// },[])
   if (user?.result?.role==='admin') {
     navigate("/admin");
   }if(user?.reulst?.role==='driver'){

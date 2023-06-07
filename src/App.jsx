@@ -35,6 +35,7 @@ import Error from "./pages/Error";
 import ForgotPassword from "./pages/authentication/ForgotPassword";
 import { Button, Modal } from "react-bootstrap";
 import Not from "./pages/users/Not";
+import MainSep from "./pages/MainSep";
 // import Not from "./Not";
 function App() {
   const dispatch = useDispatch();
@@ -95,9 +96,9 @@ function App() {
           <Route
             path="/admin"
             element={
-              <Protected isLoggedIn={user}>
+              // <Protected isLoggedIn={user}>
                 <AdminDashBoard />
-              </Protected>
+              // </Protected>
             }
           >
             <Route path="pending" element={<Todo />} />
@@ -114,6 +115,7 @@ function App() {
           <Route path="/invoice/:id" element={<Invoice />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="admin/nots/:id" element={<Not />} />
+          <Route path="main" element={<MainSep />} />
         </Routes>
         {/* <Home/> */}
         <Footer />
