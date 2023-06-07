@@ -53,7 +53,7 @@ const ListTodos = () => {
     window.alert("are sure  you want to activate this user");
     if (todo._id) {
       dispatch(rejectUser(todo));
-      navigate("/");
+      navigate("/admin");
     }
     setTodo({
       isComplete: false,

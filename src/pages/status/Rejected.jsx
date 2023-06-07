@@ -36,7 +36,7 @@ const Pedding = () => {
   const handleDelete = (id) => {
     alert('are you sure you want to permanently delete this user')
     dispatch(deleteTodo(id));
-    navigate("/admin/rejected");
+    navigate("/admin");
   };
 
   useEffect(() => {
@@ -68,7 +68,7 @@ const Pedding = () => {
 window.alert('are sure  you want to activate this user')
     if (todo._id) {
       dispatch(rejectUser(todo));
-      navigate('/')
+      navigate('/admin')
     }
     setTodo({
       isComplete: false,
