@@ -41,7 +41,7 @@ function MultiStepForm() {
         setStep(step + 1);
         toast.success("Zip code is within the range");
       } else {
-        toast.error("Invalid number. Please enter a number within the range.");
+        toast.error("Invalid Address .Please register with a valid address.");
       }
     }
   };
