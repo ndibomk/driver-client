@@ -73,7 +73,7 @@ const ForgotPassword = () => {
       dispatch(forgetPassword({ formValue, navigate, toast }));
       alert("succes");
       toast.success(`email sent to ${products.name}`);
-      navigate("/");
+      navigate("/admin");
     }
   };
   const onInputChange = (e) => {

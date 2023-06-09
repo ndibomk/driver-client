@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 // import ReviewForm from '../test/Reviess'
 import Reviews from "../test/Reviews";
-import { invoiceAdd } from "../../redux/features/invoiceSlice";
+// import { invoiceAdd } from "../../redux/features/invoiceSlice";
 import {toast} from 'react-toastify'
 import { useDispatch } from "react-redux";
 const UserOrders = () => {
@@ -61,12 +61,12 @@ console.log('form', form);
       
     }));
   }, []);
-const handleSubmit=(e)=>{
-  e.preventDefault()
-  dispatch(invoiceAdd({ ...form, toast }));
-
-  console.log('form',form)
-}
+// const handleSubmit=(e)=>{
+  // e.preventDefault()
+  // dispatch(invoiceAdd({ ...form, toast }));
+// 
+  // console.log('form',form)
+// }
   return (
     <div style={{ background: "rgb(241, 238, 238)" }}>
       <h2 style={{ background: "", textAlign: "center" }}>Pending Orders</h2>

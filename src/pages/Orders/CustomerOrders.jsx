@@ -69,10 +69,9 @@ const CustomerOrders = () => {
     async function fetchData() {
       try {
         const res = await axios.get(`https://erytyu.onrender.com/invoice`);
-        res.data.sort(compare);
-        const result = res.data.filter((_, index) => index < 1);
-
-        setInvoice(result);
+        // res.data.sort(compare);
+        const result = res.data.filter((_, index) => index <= 1);
+        setInvoice(res.data);
         setInvoice1(result[0].address);
         console.log("results", result[0].address);
       } catch (error) {
@@ -708,7 +707,13 @@ const CustomerOrders = () => {
             {invoice.map((item) => {
               return (
                 <>
-                  {/* {user?.result?._id === item.userId ? ( */}
+
+
+
+
+             {user?.result?._id ===item.userId &&
+                  
+                  
                     <>
                       {/* {currentDate - moment(item.createdAt).format("D") <= 4  */}
                        {/* ? ( */}
@@ -730,7 +735,7 @@ const CustomerOrders = () => {
                                 <h6> Customer name: {item.name}</h6>
                                 <h6> Customer phone : {item.phone}</h6>
                                 <h6>Customer address {item.address}</h6>
-                                <h6> Your Cut :$10</h6>
+                                <h6> Your Cut : $ {item.cut}</h6>
                               </Modal.Body>
                               <Modal.Footer>
                                 <Button
@@ -745,18 +750,20 @@ const CustomerOrders = () => {
                               </Modal.Footer>
                             </Modal>
                           </>
-                          {/* {moment(item.createdAt).format("D")} */}
-                          {/* {currentDate} */}
+                          
+                         
+                         
                         </>
-                      {/* ) : ( */}
-                        {/* "" */}
-                      {/* )} */}
+                     
+                     
+                     
                     </>
-                  {/* ) : ( */}
-                    {/* "" */}
-                  {/* )} */}
-                  <p></p>
+                  
+                  
+             }
+                  
                 </>
+                  
               );
             })}
 

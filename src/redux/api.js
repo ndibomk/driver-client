@@ -18,6 +18,7 @@ API.interceptors.request.use((req) => {
 export const signIn = (formData) => API.post("/users/signin", formData);
 export const signUp = (formData) => API.post("/users/signup", formData);
 export const createTour = (formData) => API.post("/products", formData);
+export const createInvoice = (formData) => API.post("/invoice", formData);
 export const createMessage = (formData) => API.post("/message", formData);
 export const createHelp = (formData) => API.post("/help", formData);
 export const createAnswer = (formData) => API.post("/answer", formData);

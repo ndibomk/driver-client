@@ -6,6 +6,7 @@ import { ImArrowRight } from "react-icons/im";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import MultiStepForm from "./authentication/Register";
+// import Barcode from "./Barcode";
 
 const Hero = () => {
   const { user } = useSelector((state) => ({ ...state.auth }));
@@ -53,6 +54,7 @@ const Hero = () => {
           {/* <MultiStepForm className='' /> */}
          {/* )}  */}
       </div>
+      {/* <Barcode/> */}
     </div>
   );
 };
