@@ -96,9 +96,9 @@ function App() {
           <Route
             path="/admin"
             element={
-              // <Protected isLoggedIn={user}>
+              // <Protected isAuthenticated={user}>
                 <AdminDashBoard />
-              // </Protected>
+              //  </Protected>
             }
           >
             <Route path="pending" element={<Todo />} />

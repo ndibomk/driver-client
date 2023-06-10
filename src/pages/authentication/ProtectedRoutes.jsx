@@ -1,18 +1,19 @@
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { Redirect } from 'react-router-dom';
 
-const [authenticated, setauthenticated] = useState(null);
-const navigate = useNavigate();
+const ProtectedRoute = ({ component: Component, isAuthenticated, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        isAuthenticated ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/" />
+        )
+      }
+    />
+  );
+};
 
-useEffect(() => {
-  const loggedInUser = localStorage.getItem("profile");
-  if (loggedInUser) {
-    setauthenticated(loggedInUser);
-  }
-  console.log(loggedInUser);
-}, []);
-
-if (!authenticated) {
-  navigate("/");
-} else {
-  navigate("/admin.p");
-}
+export default ProtectedRoute;

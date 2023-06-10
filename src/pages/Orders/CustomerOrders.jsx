@@ -69,11 +69,10 @@ const CustomerOrders = () => {
     async function fetchData() {
       try {
         const res = await axios.get(`https://erytyu.onrender.com/invoice`);
-        // res.data.sort(compare);
-        const result = res.data.filter((_, index) => index <= 1);
-        setInvoice(res.data);
+        res.data.sort(compare)
+        const result = res.data.filter((_, index) => index < 1);
+        setInvoice(result);
         setInvoice1(result[0].address);
-        console.log("results", result[0].address);
       } catch (error) {
         console.log(error);
       }
