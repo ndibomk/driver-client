@@ -31,7 +31,7 @@ const ListTodos = () => {
   };
   const handleSubmit = (e) => {
     // e.preventDefault();
-    window.alert("are sure  you want to temporarily deactivate  this user");
+    window.alert("are sure  you want to temporarily deactivate  the user");
 
     if (todo._id) {
       dispatch(updateTodo(todo));
